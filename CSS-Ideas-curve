@@ -1,0 +1,6 @@
+    content: "/\A–\A\\\A|";
+    text-align: center;
+    -webkit-animation: spin 1s steps(4) infinite;
+    animation: spin 1s steps(4) infinite;
+    
+    ^ idea for spinning animation for loading / in progress / project or task status
