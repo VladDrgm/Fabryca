@@ -19,6 +19,7 @@
 ## General Instructions
 
 ### Create Branch
+	##### GIT PULL MAIN BEFORE STARTING TO WORK, then move on with the below branch creation
 	A: Branch Creation:
 		```git branch [BRANCH_NAME]``` OR ```git checkout -b [BRANCH_NAME]```
 	   Switch to branch:
