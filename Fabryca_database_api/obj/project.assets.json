@@ -10045,19 +10045,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/saltdev/.nuget/packages/": {}
+    "/Users/eirik/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/saltdev/Desktop/SALT/Fabryca/Fabryca/fabryca_database_api/Fabryca_database_api.csproj",
+      "projectUniqueName": "/Users/eirik/code/eirikslys/fabryca/Fabryca/Fabryca_database_api/Fabryca_database_api.csproj",
       "projectName": "Fabryca_database_api",
-      "projectPath": "/Users/saltdev/Desktop/SALT/Fabryca/Fabryca/fabryca_database_api/Fabryca_database_api.csproj",
-      "packagesPath": "/Users/saltdev/.nuget/packages/",
-      "outputPath": "/Users/saltdev/Desktop/SALT/Fabryca/Fabryca/fabryca_database_api/obj/",
+      "projectPath": "/Users/eirik/code/eirikslys/fabryca/Fabryca/Fabryca_database_api/Fabryca_database_api.csproj",
+      "packagesPath": "/Users/eirik/.nuget/packages/",
+      "outputPath": "/Users/eirik/code/eirikslys/fabryca/Fabryca/Fabryca_database_api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/saltdev/.nuget/NuGet/NuGet.Config"
+        "/Users/eirik/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -10126,7 +10126,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
       }
     }
   }
