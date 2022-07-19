@@ -5,3 +5,12 @@ Fabryca_database_api/.DS_Store
 Fabryca_database_api/obj/staticwebassets.pack.sentinel
 Fabryca_database_api/obj/Debug/
 .DS_Store
+staticwebassets.pack.sentinel
+Fabryca_database_api/obj/Fabryca_database_api.csproj.nuget.dgspec.json
+Fabryca_database_api/obj/project.assets.json
+Fabryca_database_api/obj/project.nuget.cache
+Fabryca_database_api/obj/Debug/net6.0/Fabryca_database_api.assets.cache
+Fabryca_database_api/obj/Debug/net6.0/Fabryca_database_api.dll
+Fabryca_database_api/obj/Debug/net6.0/Fabryca_database_api.pdb
+Fabryca_database_api/obj/Debug/net6.0/ref/Fabryca_database_api.dll
+Fabryca_database_api/obj/Debug/net6.0/refint/Fabryca_database_api.dll
