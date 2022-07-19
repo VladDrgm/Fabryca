@@ -59,8 +59,8 @@ namespace Fabryca_database_api.Controllers
 
         // PUT: api/FabrukaDb/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{/title/oldTitle}")]
-        public async Task<IActionResult> PutTicket(string oldTitle, string newTitle)
+        [HttpPut("{oldTitle}")]
+        public async Task<IActionResult> PutTicketTitle(string oldTitle, string newTitle)
         {
           var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == oldTitle);
           if (ticketToChange == null) return BadRequest();
@@ -73,19 +73,19 @@ namespace Fabryca_database_api.Controllers
           return NoContent();
         }
 
-        // [HttpPut("{/title/description}")]
-        // public async Task<IActionResult> PutTicket(string title, string description)
-        // {
-        //   var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
-        //   if (ticketToChange == null) return BadRequest();
+        [HttpPut("description")]
+        public async Task<IActionResult> PutTicketDescription(string title, string description)
+        {
+          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
+          if (ticketToChange == null) return BadRequest();
 
-        //   ticketToChange.Description = description;
-        //   _context.Entry(ticketToChange).State = EntityState.Modified;
+          ticketToChange.Description = description;
+          _context.Entry(ticketToChange).State = EntityState.Modified;
 
-        //   await _context.SaveChangesAsync();
+          await _context.SaveChangesAsync();
 
-        //   return NoContent();
-        // }
+          return NoContent();
+        }
 
         // POST: api/FabrykaDb
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
