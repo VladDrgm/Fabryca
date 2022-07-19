@@ -30,12 +30,14 @@ function App() {
 
   return (
     <ThemeProvider>
-    <div className="App">
+    <div className="App" id="outer-container">
+      <div id="page-wrap">
       <Navbar></Navbar>
       <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
       {ticketList.map(ticket =>
         ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}    
       <Board> </Board>
+      </div>
     </div>
     </ThemeProvider>
   );
