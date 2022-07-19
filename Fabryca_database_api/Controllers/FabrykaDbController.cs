@@ -32,6 +32,18 @@ namespace Fabryca_database_api.Controllers
           return result;
         }
 
+        private List<CategoryToApi> DbToCatDTO(List<Category> categories)
+        {
+          var result = new List<CategoryToApi>();
+
+          foreach (var cat in categories)
+          {
+            var temp = new CategoryToApi(cat);
+            result.Add(temp);
+          }
+          return result;
+        }
+
         // GET: api/FabrukaDb
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTicket()
@@ -41,6 +53,17 @@ namespace Fabryca_database_api.Controllers
               return NotFound();
           }
           var res =  DbToDTO(await _context.Ticket.Include(x => x.Category).ToListAsync());
+          return res;
+        }
+
+        [HttpGet("categories")]
+        public async Task<ActionResult<IEnumerable<CategoryToApi>>> GetCategories()
+        {
+          if (_context.Category == null)
+          {
+              return NotFound();
+          }
+          var res =  DbToCatDTO(await _context.Category.ToListAsync());
           return res;
         }
 
