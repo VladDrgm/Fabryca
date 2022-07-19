@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Sih/MJRSNEFCmZvv33dSDKwbLsnoBva1Ft8QQ+SSyFd9EKFaj+HTIdJkWK9055p9R4GPtqC0LE/eFiBZgzvgkQ==",
+  "dgSpecHash": "dBdkXtrHZ025X4WsncgR8L3Y89jMJh3ao6e2pd7jzWGG2lUvof4wcNzy3xzM+aP4c8S2jkdfp6eNC83VbdjRhQ==",
   "success": true,
-  "projectFilePath": "/Users/saltdev/Desktop/SALT/Fabryca/Fabryca/fabryca_database_api/Fabryca_database_api.csproj",
+  "projectFilePath": "/Users/saltdev/salt/FinalProject-Fabryca/Fabryca/Fabryca_database_api/Fabryca_database_api.csproj",
   "expectedPackageFiles": [
     "/Users/saltdev/.nuget/packages/entityframework/6.4.4/entityframework.6.4.4.nupkg.sha512",
     "/Users/saltdev/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
