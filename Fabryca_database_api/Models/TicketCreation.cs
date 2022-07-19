@@ -1,20 +1,18 @@
 namespace Fabryca_database_api.Models;
 
-public class TicketToApi
+public class TicketCreation
 {
-  public TicketToApi(Ticket ticket)
+  public TicketCreation(TicketToApi ticket)
   {
     Title = ticket.Title;
     Status = ticket.Status;
-    CreatedAt = ticket.CreatedAt.ToLongDateString();
     Description = ticket.Description;
-    CategoryName = ticket.Category.Name;
+    CategoryName = ticket.CategoryName;
   }
-  public TicketToApi() {}
+  public TicketCreation() {}
 
   public string Title { get; set; }
   public string Status { get; set; }
-  public string CreatedAt { get; set; }
   public string Description { get; set; }
   public string CategoryName { get; set; }
 }
