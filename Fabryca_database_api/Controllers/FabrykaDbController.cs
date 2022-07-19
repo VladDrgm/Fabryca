@@ -32,8 +32,6 @@ namespace Fabryca_database_api.Controllers
           return result;
         }
 
-        private TicketToApi TicketToDTO(Ticket ticket) => new TicketToApi(ticket);
-
         // GET: api/FabrukaDb
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTicket()
@@ -50,23 +48,18 @@ namespace Fabryca_database_api.Controllers
         [HttpGet("{title}")]
         public async Task<ActionResult<TicketToApi>> GetTicket(string title)
         {
-          if (_context.Ticket == null)
-          {
-              return NotFound();
-          }
-            var ticket = await _context.Ticket.Include(x => x.Category).FirstOrDefaultAsync(x => x.Title == title);
+          if (_context.Ticket == null) return NotFound();
 
-            if (ticket == null)
-            {
-                return NotFound();
-            }
+          var ticket = await _context.Ticket.Include(x => x.Category).FirstOrDefaultAsync(x => x.Title == title);
 
-            return new TicketToApi(ticket);
+          if (ticket == null) return NotFound();
+
+          return new TicketToApi(ticket);
         }
 
         // PUT: api/FabrukaDb/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{oldTitle}")]
+        [HttpPut("{/title/oldTitle}")]
         public async Task<IActionResult> PutTicket(string oldTitle, string newTitle)
         {
           var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == oldTitle);
@@ -79,6 +72,20 @@ namespace Fabryca_database_api.Controllers
 
           return NoContent();
         }
+
+        // [HttpPut("{/title/description}")]
+        // public async Task<IActionResult> PutTicket(string title, string description)
+        // {
+        //   var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
+        //   if (ticketToChange == null) return BadRequest();
+
+        //   ticketToChange.Description = description;
+        //   _context.Entry(ticketToChange).State = EntityState.Modified;
+
+        //   await _context.SaveChangesAsync();
+
+        //   return NoContent();
+        // }
 
         // POST: api/FabrykaDb
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
