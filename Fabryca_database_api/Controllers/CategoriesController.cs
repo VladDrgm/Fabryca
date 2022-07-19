@@ -20,7 +20,7 @@ namespace Fabryca_database_api.Controllers
             _context = context;
         }
 
-        private List<CategoryToApi> DbToCatDTO(List<Category> categories)
+        private List<CategoryToApi> DbToCategoriesDTO(List<Category> categories)
         {
           var result = new List<CategoryToApi>();
 
@@ -32,6 +32,8 @@ namespace Fabryca_database_api.Controllers
           return result;
         }
 
+        private CategoryToApi DbToCategoryDTO(Category category) => new CategoryToApi(category);
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CategoryToApi>>> GetCategories()
         {
@@ -39,8 +41,54 @@ namespace Fabryca_database_api.Controllers
           {
               return NotFound();
           }
-          var res =  DbToCatDTO(await _context.Category.ToListAsync());
+          var res =  DbToCategoriesDTO(await _context.Category.ToListAsync());
           return res;
+        }
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult<CategoryToApi>> GetCategory(string name)
+        {
+          if (_context.Category == null)
+          {
+              return NotFound();
+          }
+          var res =  DbToCategoryDTO(await _context.Category.FirstOrDefaultAsync(x => x.Name == name));
+          return res;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Category>> PostCategory(string categoryName)
+        {
+          var isCategoryInDb = await _context.Category.FirstOrDefaultAsync(x => x.Name == categoryName);
+
+          if (isCategoryInDb == null)
+          {
+            var newCategory = new Category { Name = categoryName };
+            _context.Category.Add(newCategory);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetCategory", new { name = newCategory.Name }, newCategory);
+          }
+          return null;
+
+        }
+
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> DeleteCategory(string name)
+        {
+            if (_context.Category == null)
+            {
+                return NotFound();
+            }
+            var ticket = await _context.Category.FirstOrDefaultAsync(x => x.Name == name);
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            _context.Category.Remove(ticket);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
