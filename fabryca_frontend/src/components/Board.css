@@ -1,0 +1,25 @@
+.board {
+  background-color: #008080;
+  padding: 20px;
+  height: 100%;
+}
+
+.category {
+  border-radius: 0.15em;
+  display: flex;
+  margin: 1em;
+}
+
+
+.category__inner {
+  height: 100%;
+  width: 100% !important;
+}
+
+.category__header {
+  border: black solid 0.4px;
+  display: flex;
+  height: 2em;
+  flex-direction: column;
+  justify-content: center;
+}
