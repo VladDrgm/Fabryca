@@ -3,8 +3,10 @@ import './App.css';
 import React from 'react'; 
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
+import { Button, ThemeProvider } from '@react95/core'
 import TicketCard from './components/TicketCard';
 import TicketForm from './components/TicketForm';
+import Board from './components/Board';
 
 
 
@@ -21,14 +23,21 @@ function App() {
   useEffect(() => {
     getData()
   }, []);
+  // <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
+  // {ticketList.map(ticket =>
+  //   ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}    
+
 
   return (
+    <ThemeProvider>
     <div className="App">
       <Navbar></Navbar>
       <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
       {ticketList.map(ticket =>
         ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}    
+      <Board> </Board>
     </div>
+    </ThemeProvider>
   );
 }
 
