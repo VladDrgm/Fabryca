@@ -20,6 +20,7 @@ height: 70%;
 width: auto;
 border-radius: 0.1em;
 font-family: monospace;
+font-weight: bold;
 }
 
 .logo__navbar {
