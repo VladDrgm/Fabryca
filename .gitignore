@@ -3,3 +3,4 @@ Fabryca_database_api/bin
 Fabryca_database_api/.DS_Store
 *.dll
 Fabryca_database_api/obj/staticwebassets.pack.sentinel
+Fabryca_database_api/obj/Debug/
