@@ -66,34 +66,16 @@ namespace Fabryca_database_api.Controllers
 
         // PUT: api/FabrukaDb/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutTicket(int id, TicketToApi ticket)
+        [HttpPut("{oldTitle}")]
+        public async Task<IActionResult> PutTicket(string oldTitle, string newTitle)
         {
-          var category = await _context.Category.FirstOrDefaultAsync(c => c.Name == ticket.CategoryName);
-           
-          var DbTicket = new Ticket { Id = id, Category = category, Title = ticket.Title, Description = ticket.Description, Status = ticket.Status, CreatedAt = ticket.CreatedAt};
-          if (id != DbTicket.Id)
-          {
-              return BadRequest();
-          }
+          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == oldTitle);
+          if (ticketToChange == null) return BadRequest();
 
-          _context.Entry(DbTicket).State = EntityState.Modified;
+          ticketToChange.Title = newTitle;
+          _context.Entry(ticketToChange).State = EntityState.Modified;
 
-          try
-          {
-              await _context.SaveChangesAsync();
-          }
-          catch (DbUpdateConcurrencyException)
-          {
-              if (!TicketExists(id))
-              {
-                  return NotFound();
-              }
-              else
-              {
-                  throw;
-              }
-          }
+          await _context.SaveChangesAsync();
 
           return NoContent();
         }
@@ -104,6 +86,7 @@ namespace Fabryca_database_api.Controllers
         public async Task<ActionResult<Ticket>> PostTicket(TicketToApi ticket)
         {
           Category category = null;
+          //add a clause to not add a ticket with the same title as an existing one
           if (ticket.CategoryName == "Completed" || ticket.CategoryName == "Planned" || ticket.CategoryName == "Ongoing")
           {
             category = await _context.Category.FirstOrDefaultAsync(c => c.Name == ticket.CategoryName);
@@ -121,19 +104,18 @@ namespace Fabryca_database_api.Controllers
             _context.Ticket.Add(DbTicket);
             await _context.SaveChangesAsync();
 
-            // return CreatedAtAction("GetTicket", new { title = ticket.Title }, ticket);
-            return null;
+            return CreatedAtAction("GetTicket", new { title = ticket.Title }, ticket);
         }
 
         // DELETE: api/FabrukaDb/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTicket(int id)
+        [HttpDelete("{title}")]
+        public async Task<IActionResult> DeleteTicket(string title)
         {
             if (_context.Ticket == null)
             {
                 return NotFound();
             }
-            var ticket = await _context.Ticket.FindAsync(id);
+            var ticket = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
             if (ticket == null)
             {
                 return NotFound();
