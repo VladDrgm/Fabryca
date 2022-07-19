@@ -127,10 +127,10 @@ namespace Fabryca_database_api.Controllers
         // POST: api/FabrykaDb
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Ticket>> PostTicket(TicketToApi ticket)
+        public async Task<ActionResult<Ticket>> PostTicket(TicketCreation ticket)
         {
           Category category = null;
-          //add a clause to not add a ticket with the same title as an existing one
+          // add a clause to not add a ticket with the same title as an existing one
           if (ticket.CategoryName == "Completed" || ticket.CategoryName == "Planned" || ticket.CategoryName == "Ongoing")
           {
             category = await _context.Category.FirstOrDefaultAsync(c => c.Name == ticket.CategoryName);
@@ -140,7 +140,13 @@ namespace Fabryca_database_api.Controllers
             return BadRequest();
           }
 
-          var DbTicket = new Ticket { Id = null, Category = category, Title = ticket.Title, Description = ticket.Description, Status = ticket.Status, CreatedAt = ticket.CreatedAt, CategoryId = category.Id};
+          var DbTicket = new Ticket { Id = null, 
+                                      Category = category, 
+                                      Title = ticket.Title, 
+                                      Description = ticket.Description, 
+                                      Status = ticket.Status,
+                                      CreatedAt = DateTime.Parse(DateTime.Now.ToShortDateString()),
+                                      CategoryId = category.Id};
           if (_context.Ticket == null)
           {
               return Problem("Entity set 'FabrycaContext.Ticket'  is null.");
