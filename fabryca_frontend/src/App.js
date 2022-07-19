@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import React from 'react'; 
-import {useState, useEffect } from 'react';
-import { Button } from '@react95/core'
+import { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
 import TicketCard from './components/TicketCard';
 import TicketForm from './components/TicketForm';
 
@@ -24,6 +24,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navbar></Navbar>
       <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
       {ticketList.map(ticket =>
         ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}    
