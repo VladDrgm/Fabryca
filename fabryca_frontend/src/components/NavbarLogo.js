@@ -1,6 +1,6 @@
 const NavbarLogo = () => {
     return (
-        <h3>Fabryca</h3>
+        <h3 className="navbar__logo">Fabryca</h3>
     );
 };
 

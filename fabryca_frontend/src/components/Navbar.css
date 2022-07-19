@@ -1,18 +1,21 @@
+
 .navbar {
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 2.5em !important;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin-bottom: 1em;
     font-family: monospace;
     font-size: 2em;
+
 }
 
 .navbar__buttons {
     width: 70%;
-    display: flex;
+    display: none;
     justify-content: space-around;
+
 }
   
 .navbar__button {
@@ -24,20 +27,21 @@ font-weight: bold;
 }
 
 .logo__navbar {
-    height: 2em;
-    width: 2em;
     font-family: monospace;
 }
 
  .burger__button {
-    width: 5%;
+    width: 15%;
     height: 70%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 0.2em;
  }
-
+.hidden__element {
+    width: 15%;
+    padding: 0.2em;
+}
  .burger__button:hover {
     background-color: whitesmoke;
     border-radius: 0.1em;
@@ -48,4 +52,26 @@ font-weight: bold;
     height: 20%;
     width: 100%;
     justify-content: flex-start;
+ }
+
+ @media (min-width: 768px) {
+    .burger__button {
+        display: none;
+    }
+    .hidden__element {
+        display: none;
+    }
+    .navbar {
+        justify-content: space-around;
+    }
+    .logo__navbar {
+        margin-right: 0;
+    }
+    .navbar__buttons {
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    
+    }
  }
