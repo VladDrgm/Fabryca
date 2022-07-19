@@ -117,14 +117,15 @@ namespace Fabryca_database_api.Controllers
             return BadRequest();
           }
 
-          var DbTicket = new Ticket { Id = null, 
+          var DbTicket = new Ticket { 
+                                      Id = null, 
                                       Category = category, 
                                       Title = ticket.Title, 
                                       Description = ticket.Description, 
                                       Status = ticket.Status,
                                       CreatedAt = DateTime.Parse(DateTime.Now.ToShortDateString()),
                                       CategoryId = category.Id
-                                      };
+                                    };
 
           if (_context.Ticket == null)
           {
