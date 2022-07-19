@@ -10,6 +10,7 @@ public class TicketToApi
     Description = ticket.Description;
     CategoryName = ticket.Category.Name;
   }
+  public TicketToApi() {}
 
   public string Title { get; set; }
   public string Status { get; set; }

@@ -7,7 +7,7 @@ namespace Fabryca_database_api.Models;
 public class Ticket
 {
   [Key]
-  public int Id { get; set; }
+  public int? Id { get; set; }
   public string Title { get; set; }
   public string Status { get; set; }
 

@@ -20,79 +20,109 @@ namespace Fabryca_database_api.Controllers
             _context = context;
         }
 
+        private List<TicketToApi> DbToDTO(List<Ticket> tickets)
+        {
+          var result = new List<TicketToApi>();
+
+          foreach (var ticket in tickets)
+          {
+            var temp = new TicketToApi(ticket);
+            result.Add(temp);
+          }
+          return result;
+        }
+
+        private TicketToApi TicketToDTO(Ticket ticket) => new TicketToApi(ticket);
+
         // GET: api/FabrukaDb
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ticket>>> GetTicket()
+        public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTicket()
         {
           if (_context.Ticket == null)
           {
               return NotFound();
           }
-            return await _context.Ticket.ToListAsync();
+          var res =  DbToDTO(await _context.Ticket.Include(x => x.Category).ToListAsync());
+          return res;
         }
 
         // GET: api/FabrukaDb/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Ticket>> GetTicket(int id)
+        [HttpGet("{title}")]
+        public async Task<ActionResult<TicketToApi>> GetTicket(string title)
         {
           if (_context.Ticket == null)
           {
               return NotFound();
           }
-            var ticket = await _context.Ticket.FindAsync(id);
+            var ticket = await _context.Ticket.Include(x => x.Category).FirstOrDefaultAsync(x => x.Title == title);
 
             if (ticket == null)
             {
                 return NotFound();
             }
 
-            return ticket;
+            return new TicketToApi(ticket);
         }
 
         // PUT: api/FabrukaDb/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTicket(int id, Ticket ticket)
+        public async Task<IActionResult> PutTicket(int id, TicketToApi ticket)
         {
-            if (id != ticket.Id)
-            {
-                return BadRequest();
-            }
+          var category = await _context.Category.FirstOrDefaultAsync(c => c.Name == ticket.CategoryName);
+           
+          var DbTicket = new Ticket { Id = id, Category = category, Title = ticket.Title, Description = ticket.Description, Status = ticket.Status, CreatedAt = ticket.CreatedAt};
+          if (id != DbTicket.Id)
+          {
+              return BadRequest();
+          }
 
-            _context.Entry(ticket).State = EntityState.Modified;
+          _context.Entry(DbTicket).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TicketExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+          try
+          {
+              await _context.SaveChangesAsync();
+          }
+          catch (DbUpdateConcurrencyException)
+          {
+              if (!TicketExists(id))
+              {
+                  return NotFound();
+              }
+              else
+              {
+                  throw;
+              }
+          }
 
-            return NoContent();
+          return NoContent();
         }
 
         // POST: api/FabrykaDb
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Ticket>> PostTicket(Ticket ticket)
+        public async Task<ActionResult<Ticket>> PostTicket(TicketToApi ticket)
         {
+          Category category = null;
+          if (ticket.CategoryName == "Completed" || ticket.CategoryName == "Planned" || ticket.CategoryName == "Ongoing")
+          {
+            category = await _context.Category.FirstOrDefaultAsync(c => c.Name == ticket.CategoryName);
+          }
+          else
+          {
+            return BadRequest();
+          }
+
+          var DbTicket = new Ticket { Id = null, Category = category, Title = ticket.Title, Description = ticket.Description, Status = ticket.Status, CreatedAt = ticket.CreatedAt, CategoryId = category.Id};
           if (_context.Ticket == null)
           {
               return Problem("Entity set 'FabrycaContext.Ticket'  is null.");
           }
-            _context.Ticket.Add(ticket);
+            _context.Ticket.Add(DbTicket);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTicket", new { id = ticket.Id }, ticket);
+            // return CreatedAtAction("GetTicket", new { title = ticket.Title }, ticket);
+            return null;
         }
 
         // DELETE: api/FabrukaDb/5

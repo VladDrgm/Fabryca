@@ -13,4 +13,5 @@ using Fabryca_database_api.Models;
         }
 
         public DbSet<Fabryca_database_api.Models.Ticket> Ticket { get; set; } = default!;
+        public DbSet<Fabryca_database_api.Models.Category> Category { get; set; } = default!;
     }
