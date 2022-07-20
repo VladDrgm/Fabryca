@@ -28,7 +28,7 @@ const TicketCard = ({ticket}) => {
   return(
     <article className='ticket'>
       <header className='ticket__header'>
-      <h3>{ticket.Title}</h3>
+      <h3>{ticket.title}</h3>
       <div> </div>
     </header>
     <section className='ticket__body'>

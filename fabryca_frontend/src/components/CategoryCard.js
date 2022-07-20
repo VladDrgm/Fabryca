@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect } from 'react';
 import './Board.css'
 import TicketCard from './TicketCard';
+import { Frame } from '@react95/core';
 
 
 const CategoryCard = ({category}) => {
