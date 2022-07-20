@@ -91,7 +91,7 @@ namespace Fabryca_database_api.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetCategory", new { name = newCategory.Name }, newCategory);
           }
-          return null;
+          return NoContent();
 
         }
 
