@@ -20,10 +20,11 @@ const CategoryCard = ({category}) => {
     const data = await response.json();
     ticketSorter(data)
   }
+
   useEffect(() => {
     getTicketData()
     console.log(ticketList)
-  }, []);
+  }, [ticketList]);
 
   return (
     <Frame padding={4} className='planned category'>
