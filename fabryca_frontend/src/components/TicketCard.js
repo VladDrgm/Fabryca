@@ -7,6 +7,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
     <div className='ticket-card'>
       <h3>{ticket.title}</h3>
       <p>{ticket.description}</p>
+      <p>{ticket.createdAt}</p>
     </div>
   )
 }
