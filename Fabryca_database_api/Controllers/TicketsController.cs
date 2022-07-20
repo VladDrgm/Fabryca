@@ -31,6 +31,7 @@ namespace Fabryca_database_api.Controllers
           }
           return result;
         }
+        private bool TicketExists(int id) => (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
 
         // GET: api/FabrukaDb
         [HttpGet]
@@ -101,6 +102,25 @@ namespace Fabryca_database_api.Controllers
           return NoContent();
         }
 
+        [HttpPut("{title}/category")]
+        public async Task<IActionResult> PutTicketCategory(string title, string categoryName)
+        {
+          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
+          if (ticketToChange == null) return BadRequest();
+
+          var category = await _context.Category.FirstOrDefaultAsync(x => x.Name == categoryName);
+          if ( category != null)
+          {
+            ticketToChange.Category = category;
+            _context.Entry(ticketToChange).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+          }
+
+          return NoContent();
+        }
+
+
+
         // POST: api/FabrykaDb
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -116,7 +136,10 @@ namespace Fabryca_database_api.Controllers
           {
             return BadRequest();
           }
-          if (_context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title) != null)
+
+          var tick = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title);
+
+          if (tick != null)
           {
             return BadRequest("Please choose a unique title for the ticket");
           }
@@ -159,11 +182,6 @@ namespace Fabryca_database_api.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool TicketExists(int id)
-        {
-            return (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
