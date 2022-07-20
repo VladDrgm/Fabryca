@@ -39,6 +39,7 @@ function App() {
     //   <Navbar></Navbar>
       <Router>
         <Routes>
+          <Route exact path="" element={<BoardPage/>}/>
           <Route exact path="/home" element={<BoardPage/>}/>
           <Route exact path="/privacy" element={<PrivacyPage/>}/>
           <Route exact path="/faq" element={<FaqPage/>}/>
