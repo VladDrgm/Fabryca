@@ -13,15 +13,24 @@ import Board from './components/Board';
 function App() {
   const [ticketList, setTicketList] = useState([]);
 
-  const getData = async () => {
-    const response = await fetch('https://localhost:7076/api/FabrykaDb/');
+  const getTicketData = async () => {
+    const response = await fetch('https://localhost:7076/api/Tickets/');
     const data = await response.json();
-    console.log("Fetching data: ", data)
     setTicketList(data)
   }
+
+
+
+  // useEffect(() => {
+  //   categoryList.forEach(category => {
+  //     // iterate over each categoryobject.
+  //     // find the matching tickets
+  //     // create a new object where the key
+  //   });
+  // },[ticketList])
   
   useEffect(() => {
-    getData()
+    getTicketData()
   }, []);
   // <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
   // {ticketList.map(ticket =>
