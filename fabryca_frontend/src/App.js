@@ -38,17 +38,26 @@ function App() {
 
 
   return (
-    <ThemeProvider>
-    <div className="App" id="outer-container">
-      <div id="page-wrap">
-      <Navbar></Navbar>
-      <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
-      {ticketList.map(ticket =>
-        ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}    
-      <Board> </Board>
-      </div>
-    </div>
-    </ThemeProvider>
+    // <ThemeProvider>
+    // <div className="App" id="outer-container">
+    //   <div id="page-wrap">
+    //   <Navbar></Navbar>
+      <Router>
+        <Routes>
+          <Route exact path="" element={<BoardPage/>}/>
+          <Route exact path="/privacy" element={<TicketForm/>}/>
+          <Route exact path="/faq" element={<TicketForm/>}/>
+          <Route exact path="/new" element={<TicketForm/>}/>
+          {/* <TicketForm></TicketForm> */}
+          {/* <TicketForm ticketList={ticketList} setTicketList={setTicketList}/> */}
+          {/* {ticketList.map(ticket =>
+            ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}     */}
+          {/* <Board></Board> */}
+        </Routes>
+      </Router>
+    //   </div>
+    // </div>
+    // </ThemeProvider>
   );
 }
 
