@@ -32,6 +32,18 @@ namespace Fabryca_database_api.Controllers
           return result;
         }
 
+        private List<TicketToApi> DbTicketsToDTO(List<Ticket> tickets)
+        {
+          var result = new List<TicketToApi>();
+
+          foreach (var ticket in tickets)
+          {
+            var temp = new TicketToApi(ticket);
+            result.Add(temp);
+          }
+          return result;
+        }
+
         private CategoryToApi DbToCategoryDTO(Category category) => new CategoryToApi(category);
 
         [HttpGet]
@@ -42,6 +54,17 @@ namespace Fabryca_database_api.Controllers
               return NotFound();
           }
           var res =  DbToCategoriesDTO(await _context.Category.ToListAsync());
+          return res;
+        }
+
+        [HttpGet("{categoryName}/tickets")]
+        public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTicketsForCategory(string categoryName)
+        {
+          if (_context.Category == null || _context.Ticket == null)
+          {
+              return NotFound();
+          }
+          var res =  DbTicketsToDTO(await _context.Ticket.Include(x => x.Category).Where(x => x.Category.Name == categoryName).Select(x => x).ToListAsync());
           return res;
         }
 
