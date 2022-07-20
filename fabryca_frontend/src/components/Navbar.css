@@ -28,6 +28,7 @@ font-weight: bold;
 
 .logo__navbar {
     font-family: monospace;
+    width: 100%;
 }
 
  .burger__button {
@@ -66,6 +67,7 @@ font-weight: bold;
     }
     .logo__navbar {
         margin-right: 0;
+        width: 0;
     }
     .navbar__buttons {
         width: 70%;
