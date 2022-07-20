@@ -3,7 +3,6 @@ import { Frame, Button, ThemeProvider } from '@react95/core';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BurgerMenu from './BurgerMenu';
-// import NavbarLogo from './NavbarLogo';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +20,7 @@ const Navbar = () => {
                 {/* <div className="hidden__element"></div>  */}
 
                 <div className="navbar__buttons">
-                    <Button className="navbar__button"><Link to="">Home</Link></Button>
+                    <Button className="navbar__button"><Link to="/home">Home</Link></Button>
                     <Button className="navbar__button"><Link to="/faq">FAQ</Link></Button>
                     <Button className="navbar__button"><Link to="/privacy">Privacy</Link></Button>
                     <Button className="navbar__button"><Link to="/new">PHAddTicket</Link></Button>

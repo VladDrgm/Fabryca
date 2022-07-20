@@ -5,25 +5,25 @@ import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import { Button, ThemeProvider } from '@react95/core'
 import TicketCard from './TicketCard';
-import TicketForm from './TicketForm';
+import NewTicketPage from './NewTicketPage';
 import Board from './Board';
 import { BrowserRouter as Router, Routes, Route, Redirect} from 'react-router-dom';
 
 
 
-function App() {
-  const [ticketList, setTicketList] = useState([]);
+function BoardPage() {
+//   const [ticketList, setTicketList] = useState([]);
 
-  const getData = async () => {
-    const response = await fetch('https://localhost:7076/api/FabrykaDb/');
-    const data = await response.json();
-    console.log("Fetching data: ", data)
-    setTicketList(data)
-  }
+//   const getData = async () => {
+//     const response = await fetch('https://localhost:7076/api/Tickets/');
+//     const data = await response.json();
+//     console.log("Fetching data: ", data)
+//     setTicketList(data)
+//   }
   
-  useEffect(() => {
-    getData()
-  }, []);
+//   useEffect(() => {
+//     getData()
+//   }, []);
   // <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
   // {ticketList.map(ticket =>
   //   ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}    
@@ -41,4 +41,4 @@ function App() {
   );
 }
 
-export default App;
+export default BoardPage;

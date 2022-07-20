@@ -134,7 +134,7 @@ namespace Fabryca_database_api.Controllers
           }
           else
           {
-            return BadRequest();
+            return BadRequest("Incorrect Category");
           }
 
           var tick = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title);
