@@ -116,6 +116,10 @@ namespace Fabryca_database_api.Controllers
           {
             return BadRequest();
           }
+          if (_context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title) != null)
+          {
+            return BadRequest("Please choose a unique title for the ticket");
+          }
 
           var DbTicket = new Ticket { 
                                       Id = null, 
