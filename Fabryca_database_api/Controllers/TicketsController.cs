@@ -126,16 +126,7 @@ namespace Fabryca_database_api.Controllers
         [HttpPost]
         public async Task<ActionResult<Ticket>> PostTicket(TicketCreation ticket)
         {
-          Category category = null;
-          // add a clause to not add a ticket with the same title as an existing one
-          if (ticket.CategoryName == "Completed" || ticket.CategoryName == "Planned" || ticket.CategoryName == "Ongoing")
-          {
-            category = await _context.Category.FirstOrDefaultAsync(c => c.Name == ticket.CategoryName);
-          }
-          else
-          {
-            return BadRequest("Incorrect Category");
-          }
+          Category category = await _context.Category.FirstOrDefaultAsync(x => x.Name == "Planned");
 
           var tick = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title);
 
