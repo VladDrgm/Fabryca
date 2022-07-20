@@ -1,14 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import './TicketCard.css';
 
-const TicketCard = ({ticket, ticketList, setTicketList}) => {
+const TicketCard = ({ticket}) => {
   
   return(
-    <div className='ticket-card'>
-      <h3>{ticket.title}</h3>
-      <p>{ticket.description}</p>
-      <p>{ticket.createdAt}</p>
-    </div>
+    <article className='ticket'>
+      <header className='ticket__header'>
+      <h3>{ticket.Title}</h3>
+      <div> </div>
+    </header>
+    <section className='ticket__body'>
+    <p>{ticket.description}</p>
+    <p>{ticket.createdAt}</p>
+    </section>
+  </article>
   )
 }
 
