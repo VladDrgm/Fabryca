@@ -3,27 +3,23 @@ import {useState, useEffect } from 'react';
 import './Board.css'
 import TicketCard from './TicketCard';
 import { Frame } from '@react95/core';
+// import { set } from 'cypress/types/lodash';
 
 
-const CategoryCard = ({category}) => {
+const CategoryCard = ({category, ticketList, setTicketList}) => {
 
-  const [ticketList, setTicketList] = useState([]);
+  const [localTicketList, setLocalTicketList] = useState([]);
 
   const ticketSorter = data => {
     const sortedTicketArray = data.filter(ticket => ticket.categoryName === category.name)
 
-    setTicketList(sortedTicketArray)
+    setLocalTicketList(sortedTicketArray)
   }
 
-  const getTicketData = async () => {
-    const response = await fetch('https://localhost:7076/api/Tickets/');
-    const data = await response.json();
-    ticketSorter(data)
-  }
+
 
   useEffect(() => {
-    getTicketData()
-    console.log(ticketList)
+    ticketSorter(ticketList)
   }, [ticketList]);
 
   return (
@@ -31,8 +27,8 @@ const CategoryCard = ({category}) => {
     <Frame boxShadow="in" className='category__inner'>
     <header className='category__header'> <h3>{category.name}</h3> </header>
     <section className='category__list'>
-    {ticketList.map(ticket =>
-        ( <TicketCard ticket={ticket} key={ticket.createdAt + ticket.title}/> ))}
+    {localTicketList.map(ticket =>
+        ( <TicketCard setTicketList={setTicketList} ticketList={ticketList} ticket={ticket} key={ticket.createdAt + ticket.title}/> ))}
     </section>
     </Frame>
   </Frame>
