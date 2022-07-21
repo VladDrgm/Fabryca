@@ -10,33 +10,16 @@ import Board from './components/Board';
 import BoardPage from './components/BoardPage';
 import PrivacyPage from './components/PrivacyPage';
 import FaqPage from './components/FaqPage';
+import EditTicketPage from './components/EditTicketPage'
 import { BrowserRouter as Router, Routes, Route, Redirect} from 'react-router-dom';
 
 
 
-function App() {
-  // const [ticketList, setTicketList] = useState([]);
-
-  // const getData = async () => {
-  //   const response = await fetch('https://localhost:7076/api/FabrykaDb/');
-  //   const data = await response.json();
-  //   console.log("Fetching data: ", data)
-  //   setTicketList(data)
-  // }
-  
-  // useEffect(() => {
-  //   getData()
-  // }, []);
-  // <TicketForm ticketList={ticketList} setTicketList={setTicketList}/>
-  // {ticketList.map(ticket =>
-  //   ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}    
+function App() { 
 
 
   return (
-    // <ThemeProvider>
-    // <div className="App" id="outer-container">
-    //   <div id="page-wrap">
-    //   <Navbar></Navbar>
+
       <Router>
         <Routes>
           <Route exact path="" element={<BoardPage/>}/>
@@ -44,16 +27,10 @@ function App() {
           <Route exact path="/privacy" element={<PrivacyPage/>}/>
           <Route exact path="/faq" element={<FaqPage/>}/>
           <Route exact path="/new" element={<NewTicketPage/>}/>
-          {/* <TicketForm></TicketForm> */}
-          {/* <TicketForm ticketList={ticketList} setTicketList={setTicketList}/> */}
-          {/* {ticketList.map(ticket =>
-            ( <TicketCard ticket={ticket} ticketList={ticketList} setTicketList={setTicketList} key={ticket.createdAt}/> ))}     */}
-          {/* <Board></Board> */}
+          <Route exact path="/edit" element={<EditTicketPage/>}/>
         </Routes>
       </Router>
-    //   </div>
-    // </div>
-    // </ThemeProvider>
+
   );
 }
 

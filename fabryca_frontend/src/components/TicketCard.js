@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import './TicketCard.css';
 import './Board.css';
 import { Button } from '@react95/core';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 const TicketCard = ({ticket, ticketList, setTicketList}) => {
 
@@ -88,12 +88,21 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
     e.preventDefault();
     makeCompleted();
   }
+  const navigate = useNavigate();
+  const saveNameAndNavigate = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    localStorage.setItem('name', ticket.title);
+    navigate('/edit');
+  }
   
   return(
     <article className='ticket__card'>
 
       <header className='ticket__header'>
-        <Button className='ticket__card--edit'><Link to='/edit'>Edit</Link></Button>
+        <Button className='ticket__card--edit'><Link to={{pathname: `/edit`, state: [{ticketName: ticket.name}]}} onClick={saveNameAndNavigate}>Edit</Link></Button>
+        {/* <Button className='ticket__card--edit'><a onClick={ () => {toEditPage()} }>Edit</a></Button> */}
+
         <h4>Title:</h4>
         <h3>{ticket.title}</h3>
       </header>

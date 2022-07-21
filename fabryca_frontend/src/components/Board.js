@@ -10,6 +10,8 @@ const Board = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [ticketList, setTicketList] = useState([]);
 
+  
+
   useEffect(() => {
     getTicketData();
   }, []);
