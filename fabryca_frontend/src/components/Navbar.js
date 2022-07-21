@@ -18,7 +18,7 @@ const Navbar = () => {
                     <Button className="navbar__button"><Link to="/home">Home</Link></Button>
                     <Button className="navbar__button"><Link to="/faq">FAQ</Link></Button>
                     <Button className="navbar__button"><Link to="/privacy">Privacy</Link></Button>
-                    <Button className="navbar__button"><Link to="/new">PHAddTicket</Link></Button>
+                    {/* <Button className="navbar__button"><Link to="/new">PHAddTicket</Link></Button> */}
                 </div>
 
             </Frame>
