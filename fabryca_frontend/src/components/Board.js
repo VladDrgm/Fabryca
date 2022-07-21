@@ -3,6 +3,7 @@ import {useState, useEffect } from 'react';
 import './Board.css'
 import { Frame } from '@react95/core'
 import CategoryCard from './CategoryCard';
+import LoadingComponent from './LoadingComponent';
 
 
 const Board = () => {
@@ -41,6 +42,7 @@ const Board = () => {
   
   return(
     <div className='board'>
+      <LoadingComponent />
       {categoryList.map(category =>
         ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))}
     </div>
