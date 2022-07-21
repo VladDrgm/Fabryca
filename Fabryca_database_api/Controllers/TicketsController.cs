@@ -160,22 +160,27 @@ namespace Fabryca_database_api.Controllers
             return BadRequest("Please choose a unique title for the ticket");
           }
 
-          var DbTicket = new Ticket { 
-                                      Id = null, 
-                                      Category = category, 
-                                      Title = ticket.Title, 
-                                      Description = ticket.Description, 
-                                      Status = ticket.Status,
-                                      CreatedAt = DateTime.Parse(DateTime.Now.ToShortDateString()),
-                                      CategoryId = category.Id
-                                    };
+          var DbTicket = new Ticket();
 
-          if (_context.Ticket == null)
+          if (!string.IsNullOrEmpty(ticket.Title))
           {
-              return Problem("Entity set 'FabrycaContext.Ticket'  is null.");
+            DbTicket = new Ticket { 
+                                        Id = null, 
+                                        Category = category, 
+                                        Title = ticket.Title, 
+                                        Description = ticket.Description, 
+                                        Status = ticket.Status,
+                                        CreatedAt = DateTime.Parse(DateTime.Now.ToShortDateString()),
+                                        CategoryId = category.Id
+                                      };
+            if (_context.Ticket == null)
+            {
+                return Problem("Entity set 'FabrycaContext.Ticket'  is null.");
+            }
+              _context.Ticket.Add(DbTicket);
+              await _context.SaveChangesAsync();
           }
-            _context.Ticket.Add(DbTicket);
-            await _context.SaveChangesAsync();
+
 
             return CreatedAtAction("GetTicket", new { title = ticket.Title }, ticket);
         }
