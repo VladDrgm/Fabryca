@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { Frame } from '@react95/core'
+import React, { useState } from 'react';
+import { Frame } from '@react95/core';
 import './TicketForm.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,8 +12,6 @@ import { useNavigate } from 'react-router-dom';
     const oldTicketName = localStorage.getItem('name');
   
     const putToDatabase = async () => {
-
-      // const body = JSON.stringify(newTicket);//could maybe be removed
 
       await fetch(`https://localhost:7076/api/Tickets/${oldTicketName}/ticket?newTitle=${title}&newStatus=${status}&newCategoryName=${category}&newDescription=${description}`,{
         method: 'PUT',
@@ -30,11 +28,6 @@ import { useNavigate } from 'react-router-dom';
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
       e.preventDefault();
-      // const newTicket={
-      //   Title: title,
-      //   Status: status,
-      //   Description: description,
-      //   }
         
       putToDatabase();
   

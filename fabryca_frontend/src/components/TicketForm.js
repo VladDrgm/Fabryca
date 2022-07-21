@@ -9,11 +9,11 @@ import { useNavigate } from 'react-router-dom';
     const [title, setTitle] = useState('');
     const [status, setStatus] = useState('');
   
-    const postToDatabase = (newTicket) => {
+    const postToDatabase = async (newTicket) => {
 
       const body = JSON.stringify(newTicket);
 
-      fetch('https://localhost:7076/api/Tickets',{
+      await fetch('https://localhost:7076/api/Tickets',{
         method: 'POST',
         mode: 'cors',
         headers:{'Content-Type':'application/json'},
@@ -25,6 +25,7 @@ import { useNavigate } from 'react-router-dom';
       });
   
     }
+    const navigate = useNavigate();
     const handleSubmit = e => {
       e.preventDefault();
       const newTicket={
@@ -34,6 +35,8 @@ import { useNavigate } from 'react-router-dom';
         }
         
       postToDatabase(newTicket);
+
+      navigate('/home');
   
       setTitle('');
       setDescription('');
