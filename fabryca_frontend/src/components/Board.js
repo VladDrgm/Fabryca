@@ -9,10 +9,17 @@ const Board = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [ticketList, setTicketList] = useState([]);
 
+  useEffect(() => {
+    getTicketData();
+  }, []);
 
-useEffect(() => {
-  getTicketData()
-}, []);
+  useEffect(() => {
+    setTimeout(() => {
+      getTicketData();
+    }, 2000);
+  }, [ticketList]);
+
+
 
   const getTicketData = async () => {
     const response = await fetch('https://localhost:7076/api/Tickets/');
