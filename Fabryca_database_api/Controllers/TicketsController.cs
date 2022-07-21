@@ -119,6 +119,27 @@ namespace Fabryca_database_api.Controllers
           return NoContent();
         }
 
+        [HttpPut("{title}/ticket")]
+        public async Task<IActionResult> PutTicket(string title, string? newTitle, string? newStatus, string? newCategoryName, string? newDescription)
+        {
+          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
+          if (ticketToChange == null) return BadRequest();
+
+          var category = await _context.Category.FirstOrDefaultAsync(x => x.Name == newCategoryName);
+          if ( category != null)
+          {
+            ticketToChange.Category = category;
+            if (newTitle != null) ticketToChange.Title = newTitle;
+            if (newStatus != null) ticketToChange.Status = newStatus;
+            if (newDescription != null) ticketToChange.Description = newDescription;
+
+            _context.Entry(ticketToChange).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+          }
+
+          return NoContent();
+        }
+
 
 
         // POST: api/FabrykaDb
