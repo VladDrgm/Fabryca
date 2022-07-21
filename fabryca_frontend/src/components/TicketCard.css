@@ -1,12 +1,13 @@
 /* MOBLIE FIRST */
 .ticket__card {
-  border:#282c34 solid 1px;
+  border: #282c34 solid 1px;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
   width: 100%;
   display: flex;
   flex-direction: column;
   padding: 0px 10px 10px 10px;
+  background: lightgray;
 }
 
 .ticket__header {
