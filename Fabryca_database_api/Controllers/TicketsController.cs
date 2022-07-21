@@ -129,14 +129,14 @@ namespace Fabryca_database_api.Controllers
 
 
           if (category != null) ticketToChange.Category = category;
-          if (newTitle != null)
+          if (!string.IsNullOrEmpty(newTitle))
           {
             var test = await _context.Ticket.Where(x => x.Title != title).FirstOrDefaultAsync(x => x.Title == newTitle);
             if (test != null) return BadRequest();
             ticketToChange.Title = newTitle;
           }
-          if (newStatus != null) ticketToChange.Status = newStatus;
-          if (newDescription != null) ticketToChange.Description = newDescription;
+          if (!string.IsNullOrEmpty(newStatus)) ticketToChange.Status = newStatus;
+          if (!string.IsNullOrEmpty(newDescription)) ticketToChange.Description = newDescription;
 
           _context.Entry(ticketToChange).State = EntityState.Modified;
           await _context.SaveChangesAsync();
