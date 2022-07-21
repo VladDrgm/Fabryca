@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { Frame } from '@react95/core'
 import './TicketForm.css';
+import { useNavigate } from 'react-router-dom';
+
 
  const TicketForm = () =>{
     const [description, setDescription] = useState('');
@@ -23,7 +25,6 @@ import './TicketForm.css';
       });
   
     }
-  
     const handleSubmit = e => {
       e.preventDefault();
       const newTicket={
