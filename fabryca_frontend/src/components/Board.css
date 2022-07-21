@@ -30,25 +30,3 @@
   padding-left: 1em;
 }
 
-.ticket {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.ticket__header {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.ticket__body {
-  height: 1em;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-}

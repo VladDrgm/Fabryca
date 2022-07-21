@@ -1,4 +1,45 @@
-.ticket-card {
+/* MOBLIE FIRST */
+.ticket__card {
   border:#282c34 solid 1px;
-  margin: 5px 20px 5px 0px;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px 10px 10px;
+}
+
+.ticket__header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.ticket__buttons {
+  display: flex;
+  width: 100%;
+  align-content: space-between;
+  justify-content: space-between;
+}
+.ticket__description {
+
+}
+
+.ticket__date {
+  
+}
+
+.ticket__body {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* MEDIUM SCREENS AND ABOVE */
+@media (min-width: 768px) {
+
 }
