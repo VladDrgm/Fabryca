@@ -7,11 +7,23 @@ import CategoryCard from './CategoryCard';
 
 const Board = () => {
   const [categoryList, setCategoryList] = useState([]);
+  const [ticketList, setTicketList] = useState([]);
+
+
+useEffect(() => {
+  getTicketData()
+}, []);
+
+  const getTicketData = async () => {
+    const response = await fetch('https://localhost:7076/api/Tickets/');
+    const data = await response.json();
+    setTicketList(data)
+  }
+
 
   const getCategoriesData = async () => {
     const response = await fetch('https://localhost:7076/api/Categories/');
     const data = await response.json();
-    console.log("Fetching data: ", data)
     setCategoryList(data)
   }
 
@@ -23,7 +35,7 @@ const Board = () => {
   return(
     <div className='board'>
       {categoryList.map(category =>
-        ( <CategoryCard category={category} key={category.name}/> ))}
+        ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))}
     </div>
   )
 }

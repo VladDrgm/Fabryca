@@ -3,20 +3,22 @@ import './TicketCard.css';
 import './Board.css';
 import { Button } from '@react95/core'
 
-const TicketCard = ({ticket}) => {
+const TicketCard = ({ticket, ticketList, setTicketList}) => {
 
   const deleteToDatabase = async () => {
     const url = 'https://localhost:7076/api/Tickets/' + ticket.title
     
-    const response = await fetch(url,{
+    const response = fetch(url,{
       method: 'DELETE',
       mode: 'cors',
       headers:{'Content-type':'application/json'}
       }
     )
-  await response()
-  console.log(response.ok)
-  return response.ok
+    if ((await response).ok) {
+      const newList = ticketList.filter( t => t.title != ticket.title);
+      console.log(newList);
+      setTicketList(newList)
+    }
   };
 
   const makeOngoing = () => {
@@ -28,6 +30,8 @@ const TicketCard = ({ticket}) => {
       headers:{'Content-type':'application/json'}
           }
     )
+    updateState('Ongoing');
+
   };
 
   const makePlanned = () => {
@@ -39,6 +43,7 @@ const TicketCard = ({ticket}) => {
       headers:{'Content-type':'application/json'}
       }
     )
+    updateState('Planned');
   };
 
   const makeCompleted = () => {
@@ -50,7 +55,18 @@ const TicketCard = ({ticket}) => {
       headers:{'Content-type':'application/json'}
       }
     )
+    updateState('Completed');
   };
+
+  const updateState = (newCategory) => {
+    // const ticketCopy = ticket;
+    // ticketCopy.categoryName = "Completed"
+    console.log(ticketList)
+    const updatedList = ticketList.map(
+      el => el.title === ticket.title ? { ...el, categoryName: newCategory } : el
+    )
+    setTicketList(updatedList);
+  }
 
   const handleDelete = (e) => {
     e.preventDefault();
