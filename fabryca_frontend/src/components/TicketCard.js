@@ -3,7 +3,7 @@ import './TicketCard.css';
 import './Board.css';
 import { Button } from '@react95/core'
 
-const TicketCard = ({ticket, update, setUpdate}) => {
+const TicketCard = ({ticket}) => {
 
   const deleteToDatabase = async () => {
     const url = 'https://localhost:7076/api/Tickets/' + ticket.title
@@ -27,7 +27,7 @@ const TicketCard = ({ticket, update, setUpdate}) => {
       mode: 'cors',
       headers:{'Content-type':'application/json'}
           }
-    ).then(() => setUpdate(!update))
+    )
   };
 
   const makePlanned = () => {
@@ -38,7 +38,7 @@ const TicketCard = ({ticket, update, setUpdate}) => {
       mode: 'cors',
       headers:{'Content-type':'application/json'}
       }
-    ).then(() => setUpdate(!update))
+    )
   };
 
   const makeCompleted = () => {
@@ -49,7 +49,7 @@ const TicketCard = ({ticket, update, setUpdate}) => {
       mode: 'cors',
       headers:{'Content-type':'application/json'}
       }
-    ).then(() => setUpdate(!update))
+    )
   };
 
   const handleDelete = (e) => {
