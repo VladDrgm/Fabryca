@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './TicketCard.css';
 import './Board.css';
-import { Button } from '@react95/core'
+import { Button } from '@react95/core';
+import { Link } from 'react-router-dom';
 
 const TicketCard = ({ticket, ticketList, setTicketList}) => {
 
@@ -92,6 +93,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
     <article className='ticket__card'>
 
       <header className='ticket__header'>
+        <Button className='ticket__card--edit'><Link to='/edit'>Edit</Link></Button>
         <h4>Title:</h4>
         <h3>{ticket.title}</h3>
       </header>

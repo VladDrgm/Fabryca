@@ -40,6 +40,11 @@
   align-items: center;
 }
 
+.ticket__card--edit {
+  align-self: flex-end;
+  margin-top: 0.5em;
+}
+
 /* MEDIUM SCREENS AND ABOVE */
 @media (min-width: 768px) {
 
