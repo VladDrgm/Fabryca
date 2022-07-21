@@ -1,0 +1,19 @@
+.ticket__form__frame {
+    margin: 0 15%;
+    padding: 0 0 1em;
+}
+
+.ticket__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ticket__form__field {
+    width: 90%;
+    margin-bottom: 1em;
+}
+
+.ticket__form__title {
+
+}

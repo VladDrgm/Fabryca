@@ -28,7 +28,6 @@ function NewTicketPage() {
     <div className="App" id="outer-container">
       <div id="page-wrap">
       <Navbar></Navbar>
-      <h1>add new ticket</h1>
       <TicketForm></TicketForm>
       </div>
     </div>
