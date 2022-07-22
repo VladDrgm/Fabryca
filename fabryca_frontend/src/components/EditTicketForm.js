@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Frame } from '@react95/core';
+import { Frame, Input, Button, Cursor } from '@react95/core';
 import './TicketForm.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,11 +42,11 @@ import { useNavigate } from 'react-router-dom';
       <Frame className='ticket__form__frame'>
         <form onSubmit={handleSubmit} className="ticket__form">
           <h3 className='ticket__form__title'>Edit Ticket: {oldTicketName}</h3>
-          <input type='text' placeholder='Title' value={title} className={'ticket__form__field'} onChange={e => setTitle(e.target.value)}/>
-          <input type='text' placeholder='Status' value={status} className={'ticket__form__field'} onChange={e => setStatus(e.target.value)}/>
-          <input type='text' placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/>
-          <input type='text' placeholder='Category' value={category} className={'ticket__form__field'} onChange={e => setCategory(e.target.value)}/>
-          <button type='submit'> Confirm Edit </button> 
+          <Input type='text' placeholder='Title' value={title} className={'ticket__form__field'} onChange={e => setTitle(e.target.value)}/>
+          <Input type='text' placeholder='Status' value={status} className={'ticket__form__field'} onChange={e => setStatus(e.target.value)}/>
+          <Input type='text' placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/>
+          <Input type='text' placeholder='Category' value={category} className={'ticket__form__field'} onChange={e => setCategory(e.target.value)}/>
+          <Button type='submit' style={{cursor:'pointer'}}> Confirm Edit </Button> 
         </form>
       </Frame>
     )
