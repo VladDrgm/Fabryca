@@ -19,16 +19,26 @@
 }
 .ticket__buttons {
   display: flex;
-  width: 100%;
+  flex-direction: column;
+  width: auto;
   align-content: space-between;
   justify-content: space-between;
 }
-.ticket__description {
-
+.ticket__description--hidden {
+  display: none;
 }
+.ticket__description--show {
+  display: block;
+}
+
 
 .ticket__date {
   
+}
+
+.ticket__label {
+  align-self: flex-start;
+  text-decoration: underline;
 }
 
 .ticket__body {
@@ -44,8 +54,16 @@
   align-self: flex-end;
   margin-top: 0.5em;
 }
+.ticket__hr {
+  background-color: black;
+  height: 1%;
+  width: 90%;
+}
 
 /* MEDIUM SCREENS AND ABOVE */
 @media (min-width: 768px) {
-
+  .ticket__buttons {
+    flex-direction: row;
+    width: 100%;
+  }
 }
