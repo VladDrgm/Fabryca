@@ -31,7 +31,10 @@
   display: block;
 }
 
-
+.progman {
+  height: 1em;
+  width: 1em;
+}
 .ticket__date {
   
 }
