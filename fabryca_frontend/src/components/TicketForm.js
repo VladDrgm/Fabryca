@@ -50,7 +50,7 @@ import { useNavigate } from 'react-router-dom';
           <Input type='text' placeholder='Title' value={title} className={'ticket__form__field'} onChange={e => setTitle(e.target.value)}/>
           <Input type='text'placeholder='Status' value={status} className={'ticket__form__field'} onChange={e => setStatus(e.target.value)}/>
           <Input type='text'placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/>
-          <Button type='submit'> Add a new ticket </Button> 
+          <Button type='submit'> Add Ticket </Button> 
         </form>
       </Frame>
     )

@@ -5,6 +5,7 @@ import { Button } from '@react95/core';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import '@react95/icons/icons.css';
 import { Progman46, Progman43 } from '@react95/icons'
+import { Cursor } from '@react95/core';
 
 const TicketCard = ({ticket, ticketList, setTicketList}) => {
 
@@ -106,7 +107,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
     <article className='ticket__card'>
 
       <header className='ticket__header'>
-        <Button className='ticket__card--edit'><Link to={{pathname: `/edit`, state: [{ticketName: ticket.name}]}} onClick={saveNameAndNavigate}>Edit</Link></Button>
+        <Button className='ticket__card--edit' cursor={Cursor.Pointer}><Link to={{pathname: `/edit`, state: [{ticketName: ticket.name}]}} onClick={saveNameAndNavigate}>Edit</Link></Button>
         <h4 className='ticket__label'>Title:</h4>
         <h3>{ticket.title}</h3>
         <p>({ticket.status})</p>
@@ -122,11 +123,11 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
           {ticket.categoryName === 'Planned' ? <Button onClick={handleMakeOngoing}>Ongoing</Button> : null}
           {ticket.categoryName === 'Ongoing' ? 
             <div>
-              <Button onClick={handleMakePlanned}>Planned</Button>
-              <Button onClick={handleMakeCompleted}>Completed</Button> 
+              <Button onClick={handleMakePlanned} className='winpointer'>Planned</Button>
+              <Button onClick={handleMakeCompleted} className='winpointer'>Completed</Button> 
             </div>
           : null} 
-          {ticket.categoryName === 'Completed' ? <Button onClick={handleMakeOngoing}>Ongoing</Button> : null}
+          {ticket.categoryName === 'Completed' ? <Button onClick={handleMakeOngoing} >Ongoing</Button> : null}
         </div>
       </section>
 
