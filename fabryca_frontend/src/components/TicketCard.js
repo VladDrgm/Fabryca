@@ -95,23 +95,26 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
     localStorage.setItem('name', ticket.title);
     navigate('/edit');
   }
-  
+  const [showDesc, setShowDesc] = useState(false);
+  const toggleDesc = () => {
+    setShowDesc(!showDesc);
+  }
+  const descSymbol = showDesc === true ? <i class="fa-solid fa-arrow-down"></i> : <i class="fa-solid fa-arrow-right"></i>;
   return(
     <article className='ticket__card'>
 
       <header className='ticket__header'>
         <Button className='ticket__card--edit'><Link to={{pathname: `/edit`, state: [{ticketName: ticket.name}]}} onClick={saveNameAndNavigate}>Edit</Link></Button>
-        {/* <Button className='ticket__card--edit'><a onClick={ () => {toEditPage()} }>Edit</a></Button> */}
-
-        <h4>Title:</h4>
+        <h4 className='ticket__label'>Title:</h4>
         <h3>{ticket.title}</h3>
+        <p>({ticket.status})</p>
       </header>
-
       <section className='ticket__body'>
-        <h4>Description:</h4>
-        <p className='ticket__description'>{ticket.description}</p>
-        <h4>Created At:</h4>
+        <h4 className='ticket__label' onClick={toggleDesc}>Description {descSymbol}</h4>
+        <p className={showDesc === true ? 'ticket__description--show' : 'ticket__description--hidden'}>{ticket.description}</p>
+        <h4 className='ticket__label'>Created At:</h4>
         <p className='ticket__date'>{ticket.createdAt}</p>
+        <hr className='ticket__hr'/>
         <div className='ticket__buttons'>
           <Button onClick={handleDelete}>Delete</Button>
           {ticket.categoryName === 'Planned' ? <Button onClick={handleMakeOngoing}>Ongoing</Button> : null}
