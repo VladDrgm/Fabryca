@@ -3,6 +3,8 @@ import './TicketCard.css';
 import './Board.css';
 import { Button } from '@react95/core';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import '@react95/icons/icons.css';
+import { Progman46, Progman43 } from '@react95/icons'
 
 const TicketCard = ({ticket, ticketList, setTicketList}) => {
 
@@ -99,7 +101,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   const toggleDesc = () => {
     setShowDesc(!showDesc);
   }
-  const descSymbol = showDesc === true ? <i class="fa-solid fa-arrow-down"></i> : <i class="fa-solid fa-arrow-right"></i>;
+  const descSymbol = showDesc === true ? <Progman46 variant="32x32_1" className='progman'/> : <Progman43 variant="32x32_1" className='progman'/>;
   return(
     <article className='ticket__card'>
 
