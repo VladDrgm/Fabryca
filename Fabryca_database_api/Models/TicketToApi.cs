@@ -9,6 +9,8 @@ public class TicketToApi
     CreatedAt = ticket.CreatedAt.ToLongDateString();
     Description = ticket.Description;
     CategoryName = ticket.Category.Name;
+    CreatedBy = ticket.CreatedBy;
+    AssignedTo = ticket.AssignedTo;
   }
   public TicketToApi() {}
 
@@ -17,4 +19,7 @@ public class TicketToApi
   public string CreatedAt { get; set; }
   public string Description { get; set; }
   public string CategoryName { get; set; }
+
+  public  string CreatedBy { get; set; }
+  public string AssignedTo { get; set; }
 }

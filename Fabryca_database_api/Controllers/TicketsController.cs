@@ -171,7 +171,9 @@ namespace Fabryca_database_api.Controllers
                                         Description = ticket.Description, 
                                         Status = ticket.Status,
                                         CreatedAt = DateTime.Parse(DateTime.Now.ToShortDateString()),
-                                        CategoryId = category.Id
+                                        CategoryId = category.Id,
+                                        CreatedBy = ticket.CreatedBy,
+                                        AssignedTo  = ticket.AssignedTo
                                       };
             if (_context.Ticket == null)
             {
