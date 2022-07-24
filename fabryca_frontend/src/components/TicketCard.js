@@ -116,11 +116,11 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
         <div className='created__assigned'>
           <div className='lilbox'>
             <h4 className='ticket__label'>Created At/By:</h4>
-            <p className='ticket__date'>{ticket.createdAt} by PHCreatorName</p>
+            <p className='ticket__date'>{ticket.createdAt} by {ticket.createdBy}</p>
           </div>
           <div className='lilbox'>
             <h4 className='ticket__label'>Assigned To:</h4>
-            <p>PHAssigneeName</p>
+            <p>{ticket.assignedTo}</p>
           </div>
         </div>
         <hr className='ticket__hr'/>
