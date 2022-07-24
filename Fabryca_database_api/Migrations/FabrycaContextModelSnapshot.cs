@@ -33,9 +33,31 @@ namespace Fabryca_database_api.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("ProjectId");
+
                     b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("Fabryca_database_api.Models.Project", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Fabryca_database_api.Models.Ticket", b =>
@@ -78,6 +100,17 @@ namespace Fabryca_database_api.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("Fabryca_database_api.Models.Category", b =>
+                {
+                    b.HasOne("Fabryca_database_api.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("Fabryca_database_api.Models.Ticket", b =>

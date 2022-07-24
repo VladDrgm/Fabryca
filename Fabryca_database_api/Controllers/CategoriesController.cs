@@ -46,47 +46,37 @@ namespace Fabryca_database_api.Controllers
 
         private CategoryToApi DbToCategoryDTO(Category category) => new CategoryToApi(category);
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CategoryToApi>>> GetCategories()
+        [HttpGet("name")]
+        public async Task<ActionResult<IEnumerable<CategoryToApi>>> GetCategories(string Name)
         {
           if (_context.Category == null)
           {
               return NotFound();
           }
-          var res =  DbToCategoriesDTO(await _context.Category.ToListAsync());
+          var res =  DbToCategoriesDTO(await _context.Category.Include(x => x.Project).Where(x => x.Project.Name == Name).ToListAsync());
           return res;
         }
 
-        [HttpGet("{categoryName}/tickets")]
-        public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTicketsForCategory(string categoryName)
-        {
-          if (_context.Category == null || _context.Ticket == null)
-          {
-              return NotFound();
-          }
-          var res =  DbTicketsToDTO(await _context.Ticket.Include(x => x.Category).Where(x => x.Category.Name == categoryName).Select(x => x).ToListAsync());
-          return res;
-        }
-
-        [HttpGet("{name}")]
-        public async Task<ActionResult<CategoryToApi>> GetCategory(string name)
+        [HttpGet("{projectName}/{name}")]
+        public async Task<ActionResult<CategoryToApi>> GetCategory(string projectName, string name)
         {
           if (_context.Category == null)
           {
               return NotFound();
           }
-          var res =  DbToCategoryDTO(await _context.Category.FirstOrDefaultAsync(x => x.Name == name));
+          var res =  DbToCategoryDTO(await _context.Category.Include(x => x.Project).Where(x => x.Project.Name == projectName).FirstOrDefaultAsync(x => x.Name == name));
           return res;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(string categoryName)
+        [HttpPost("{projectName}/{categoryName}")]
+        public async Task<ActionResult<Category>> PostCategory(string categoryName, string projectName)
         {
-          var isCategoryInDb = await _context.Category.FirstOrDefaultAsync(x => x.Name == categoryName);
+          var project = await _context.Projects.FirstOrDefaultAsync(x => x.Name == projectName);
+          var isCategoryInDb = await _context.Category.Include(x  => x.Project).Where(x => x.Project == project).FirstOrDefaultAsync(x => x.Name == categoryName);
 
           if (isCategoryInDb == null)
           {
-            var newCategory = new Category { Name = categoryName };
+            var newCategory = new Category { Name = categoryName, Project = project };
             _context.Category.Add(newCategory);
             await _context.SaveChangesAsync();
             return CreatedAtAction("GetCategory", new { name = newCategory.Name }, newCategory);
