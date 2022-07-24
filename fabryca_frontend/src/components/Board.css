@@ -13,8 +13,11 @@
   margin: 1em;
   width: 80% !important;
 }
-.category__list {
+.category__list--show {
   padding: 0.5em;
+}
+.category__list--hidden {
+  display: none;
 }
 
 

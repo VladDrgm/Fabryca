@@ -62,8 +62,6 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   };
 
   const updateState = (newCategory) => {
-    // const ticketCopy = ticket;
-    // ticketCopy.categoryName = "Completed"
     console.log(ticketList)
     const updatedList = ticketList.map(
       el => el.title === ticket.title ? { ...el, categoryName: newCategory } : el
@@ -101,7 +99,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   const toggleDesc = () => {
     setShowDesc(!showDesc);
   }
-  const descSymbol = showDesc === true ? <Progman46 variant="32x32_1" className='progman'/> : <Progman43 variant="32x32_1" className='progman'/>;
+  const descSymbol = showDesc === true ? <Progman46 variant="32x32_1" className='show__desc__arrow'/> : <Progman43 variant="32x32_1" className='show__desc__arrow'/>;
   return(
     <article className='ticket__card'>
 
@@ -113,9 +111,18 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
       </header>
       <section className='ticket__body'>
         <h4 className='ticket__label' onClick={toggleDesc}>Description {descSymbol}</h4>
+        
         <p className={showDesc === true ? 'ticket__description--show' : 'ticket__description--hidden'}>{ticket.description}</p>
-        <h4 className='ticket__label'>Created At:</h4>
-        <p className='ticket__date'>{ticket.createdAt}</p>
+        <div className='created__assigned'>
+          <div className='lilbox'>
+            <h4 className='ticket__label'>Created At/By:</h4>
+            <p className='ticket__date'>{ticket.createdAt} by PHCreatorName</p>
+          </div>
+          <div className='lilbox'>
+            <h4 className='ticket__label'>Assigned To:</h4>
+            <p>PHAssigneeName</p>
+          </div>
+        </div>
         <hr className='ticket__hr'/>
         <div className='ticket__buttons'>
           <Button onClick={handleDelete}>Delete</Button>

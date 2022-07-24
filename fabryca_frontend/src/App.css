@@ -3,7 +3,7 @@
   background-color: #008080;
 }
 
-body > #root > div {
+/* body > #root > div {
   height: 100vh;
 }
 
@@ -40,4 +40,4 @@ body > #root > div {
   to {
     transform: rotate(360deg);
   }
-}
+} */

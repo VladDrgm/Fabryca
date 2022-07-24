@@ -28,10 +28,11 @@
   display: none;
 }
 .ticket__description--show {
+  width: 90%;
   display: block;
 }
 
-.progman {
+.show__desc__arrow {
   height: 1em;
   width: 1em;
 }
@@ -53,6 +54,7 @@
   align-items: center;
 }
 
+
 .ticket__card--edit {
   align-self: flex-end;
   margin-top: 0.5em;
@@ -61,6 +63,14 @@
   background-color: black;
   height: 1%;
   width: 90%;
+}
+.created__assigned {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.lilbox {
+  width: 40%;
 }
 
 /* MEDIUM SCREENS AND ABOVE */
