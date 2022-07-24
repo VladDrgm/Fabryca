@@ -7,9 +7,9 @@ export default props => {
     return (
         <Menu>
            <a className="menu-item"><Link to="/home">Home</Link></a>
+           <a className="menu-item"><Link to="/projects">Projects</Link></a>
            <a className="menu-item"><Link to="/faq">FAQ</Link></a>
            <a className="menu-item"><Link to="/privacy">Privacy</Link></a>
-           <a className="menu-item"><Link to="/new">+ Ticket</Link></a>
         </Menu>
     );
 };

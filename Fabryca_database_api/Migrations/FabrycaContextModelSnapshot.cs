@@ -87,6 +87,9 @@ namespace Fabryca_database_api.Migrations
                         .HasMaxLength(1000000)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -98,6 +101,8 @@ namespace Fabryca_database_api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Tickets");
                 });
@@ -121,7 +126,13 @@ namespace Fabryca_database_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Fabryca_database_api.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Project");
                 });
 #pragma warning restore 612, 618
         }
