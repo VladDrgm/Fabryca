@@ -28,10 +28,11 @@
   display: none;
 }
 .ticket__description--show {
+  width: 100%;
   display: block;
 }
 
-.progman {
+.show__desc__arrow {
   height: 1em;
   width: 1em;
 }

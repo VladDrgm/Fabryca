@@ -4,7 +4,7 @@
     width: 1.5em;
     height: 1.25em;
     left: 3%;
-    top: 2.5%;
+    top: 2%;
   }
   
   /* Color/shape of burger icon bars */
@@ -48,9 +48,9 @@
   }
   
   /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
+  /* .bm-morph-shape {
     fill: #373a47;
-  }
+  } */
   
   /* Wrapper for item list */
   .bm-item-list {
