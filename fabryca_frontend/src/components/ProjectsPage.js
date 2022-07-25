@@ -12,7 +12,7 @@ function ProjectsPage() {
     const [projectList, setProjectList] = useState([]);
 
     const getProjectsData = async () => {
-        const response = await fetch(`https://localhost:7076/api/Projects`);
+        const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Projects`);
         const data = await response.json();
         setProjectList(data)
         console.log(data)

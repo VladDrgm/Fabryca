@@ -6,20 +6,21 @@ import Navbar from './Navbar';
 import { Button, ThemeProvider } from '@react95/core'
 import TicketCard from './TicketCard';
 import Board from './Board';
+import ProjectForm from './ProjectForm';
 import { BrowserRouter as Router, Routes, Route, Redirect} from 'react-router-dom';
 
-function FaqPage() { 
+function NewTicketPage() { 
 
   return (
     <ThemeProvider>
     <div className="App" id="outer-container">
       <div id="page-wrap">
       <Navbar></Navbar>
-      <h1>Faq page</h1>
+      <ProjectForm></ProjectForm>
       </div>
     </div>
     </ThemeProvider>
   );
 }
 
-export default FaqPage;
+export default NewTicketPage;

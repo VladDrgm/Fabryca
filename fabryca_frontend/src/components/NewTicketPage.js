@@ -9,19 +9,7 @@ import Board from './Board';
 import TicketForm from './TicketForm';
 import { BrowserRouter as Router, Routes, Route, Redirect} from 'react-router-dom';
 
-
-
 function NewTicketPage() {
-  // const [ticketList, setTicketList] = useState([]);
-
-  // const getData = async () => {
-  //   const response = await fetch('https://localhost:7076/api/Tickets/');
-  //   const data = await response.json();
-  //   console.log("Fetching data: ", data)
-  //   // setTicketList(data)
-  // }
-  
- 
 
   return (
     <ThemeProvider>
