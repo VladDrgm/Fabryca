@@ -46,14 +46,14 @@ namespace Fabryca_database_api.Controllers
 
         private CategoryToApi DbToCategoryDTO(Category category) => new CategoryToApi(category);
 
-        [HttpGet("name")]
-        public async Task<ActionResult<IEnumerable<CategoryToApi>>> GetCategories(string Name)
+        [HttpGet("{projectName}")]
+        public async Task<ActionResult<IEnumerable<CategoryToApi>>> GetCategories(string projectName)
         {
           if (_context.Category == null)
           {
               return NotFound();
           }
-          var res =  DbToCategoriesDTO(await _context.Category.Include(x => x.Project).Where(x => x.Project.Name == Name).ToListAsync());
+          var res =  DbToCategoriesDTO(await _context.Category.Include(x => x.Project).Where(x => x.Project.Name == projectName).ToListAsync());
           return res;
         }
 
@@ -85,14 +85,14 @@ namespace Fabryca_database_api.Controllers
 
         }
 
-        [HttpDelete("{name}")]
-        public async Task<IActionResult> DeleteCategory(string name)
+        [HttpDelete("{projectName}/{name}")]
+        public async Task<IActionResult> DeleteCategory(string projectName, string name)
         {
             if (_context.Category == null)
             {
                 return NotFound();
             }
-            var ticket = await _context.Category.FirstOrDefaultAsync(x => x.Name == name);
+            var ticket = await _context.Category.Include(x => x.Project).Where(x => x.Project.Name == projectName).FirstOrDefaultAsync(x => x.Name == name);
             if (ticket == null)
             {
                 return NotFound();
