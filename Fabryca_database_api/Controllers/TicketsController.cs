@@ -44,11 +44,14 @@ namespace Fabryca_database_api.Controllers
               return NotFound();
           }
 
-          var project = _context.Projects.FirstOrDefault(p => p.Name == projectName);
+          var project = await _context.Projects.FirstOrDefaultAsync(p => p.Name == projectName);
+
           var result =  await _context.Ticket
-                                      .Include(x => x.Project)
-                                      .Where(x => x.Project == project)
+                                      .Include(x => x.Category)
+                                      .ThenInclude(x => x.Project)
+                                      .Where(x => x.Project.Name == project.Name)
                                       .ToListAsync();
+
           if (result == null || result.Count == 0) return NotFound("No items found");
 
           return DbToDTO(result);
