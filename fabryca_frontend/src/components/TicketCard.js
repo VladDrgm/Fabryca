@@ -5,6 +5,7 @@ import { Button } from '@react95/core';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import '@react95/icons/icons.css';
 import { Progman46, Progman43 } from '@react95/icons'
+import CursorButton from './CursorButton';
 
 const TicketCard = ({ticket, ticketList, setTicketList}) => {
 
@@ -104,7 +105,9 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
     <article className='ticket__card'>
 
       <header className='ticket__header'>
-        <Button className='ticket__card--edit'><Link to={{pathname: `/edit`, state: [{ticketName: ticket.name}]}} onClick={saveNameAndNavigate}>Edit</Link></Button>
+        <Link to={{pathname: `/edit`, state: [{ticketName: ticket.name}]}} className='ticket__card--edit' onClick={saveNameAndNavigate}>
+          <CursorButton type={'Pointer'} text={'Edit'} />
+        </Link>
         <h4 className='ticket__label'>Title:</h4>
         <h3>{ticket.title}</h3>
         <p>({ticket.status})</p>
@@ -125,15 +128,15 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
         </div>
         <hr className='ticket__hr'/>
         <div className='ticket__buttons'>
-          <Button onClick={handleDelete}>Delete</Button>
-          {ticket.categoryName === 'Planned' ? <Button onClick={handleMakeOngoing}>Ongoing</Button> : null}
+          <CursorButton type={'Pointer'} text={'Delete'} onClick={handleDelete}/>
+          {ticket.categoryName === 'Planned' ? <CursorButton type={'Pointer'} text={'Ongoing'} onClick={handleMakeOngoing} /> : null}
           {ticket.categoryName === 'Ongoing' ? 
             <div>
-              <Button onClick={handleMakePlanned}>Planned</Button>
-              <Button onClick={handleMakeCompleted}>Completed</Button> 
+              <CursorButton type={'Pointer'} text={'Planned'} onClick={handleMakePlanned} />
+              <CursorButton type={'Pointer'} text={'Completed'} onClick={handleMakeCompleted} /> 
             </div>
           : null} 
-          {ticket.categoryName === 'Completed' ? <Button onClick={handleMakeOngoing}>Ongoing</Button> : null}
+          {ticket.categoryName === 'Completed' ? <CursorButton type={'Pointer'} text={'Ongoing'} onClick={handleMakeOngoing} /> : null}
         </div>
       </section>
 

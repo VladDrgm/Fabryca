@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import { Button, ThemeProvider } from '@react95/core'
 import { Link } from 'react-router-dom';
 import Board from './Board';
+import CursorButton from './CursorButton';
 
 
 
@@ -15,7 +16,9 @@ function BoardPage() {
     <div className="App" id="outer-container">
       <div id="page-wrap">
       <Navbar></Navbar>
-      <Button className="navbar__button"><Link to="/new">Add a Ticket</Link></Button>
+      <Link to="/new">
+      <CursorButton type={'Pointer'} text={'Add a Ticket'} className="navbar__button" />
+      </Link>
       <Board></Board>
       </div>
     </div>

@@ -2,6 +2,7 @@ import './Navbar.css'
 import { Frame, Button, ThemeProvider } from '@react95/core';
 import { Link } from 'react-router-dom';
 import BurgerMenu from './BurgerMenu';
+import CursorButton from './CursorButton';
 
 const Navbar = () => {
     return (
@@ -15,12 +16,16 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar__buttons">
-                    <Button className="navbar__button"><Link to="/home">Home</Link></Button>
-                    <Button className="navbar__button"><Link to="/faq">FAQ</Link></Button>
-                    <Button className="navbar__button"><Link to="/privacy">Privacy</Link></Button>
+                    <Link to="/home"> 
+                        <CursorButton type={'Pointer'} text={'Home'} className="navbar__button" /> </Link>
+                    <Link to="/faq">
+                        <CursorButton type={'Pointer'} text={'FAQ'} className="navbar__button" /> 
+                    </Link>
+                    <Link to="/privacy">
+                        <CursorButton type={'Pointer'} text={'Privacy'} className="navbar__button" /> 
+                    </Link>
                     {/* <Button className="navbar__button"><Link to="/new">PHAddTicket</Link></Button> */}
                 </div>
-
             </Frame>
         </ThemeProvider>
     );

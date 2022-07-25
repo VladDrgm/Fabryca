@@ -2,12 +2,15 @@ import React, {useEffect, useState} from 'react';
 import { Frame, Input, Button} from '@react95/core'
 import './TicketForm.css';
 import { useNavigate } from 'react-router-dom';
+import CursorButton from './CursorButton';
 
 
  const TicketForm = () =>{
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
     const [status, setStatus] = useState('');
+    const [userList, setUserList] = useState(['Eirik', 'Vlad', 'Pontus'])
+
   
     const postToDatabase = async (newTicket) => {
 
@@ -32,6 +35,8 @@ import { useNavigate } from 'react-router-dom';
         Title: title,
         Status: status,
         Description: description,
+        createdBy: userList[Math.floor((Math.random()*userList.length))],
+        assignedTo: userList[Math.floor((Math.random()*userList.length))]
         }
         
       postToDatabase(newTicket);
@@ -50,7 +55,7 @@ import { useNavigate } from 'react-router-dom';
           <Input type='text' placeholder='Title' value={title} className={'ticket__form__field'} onChange={e => setTitle(e.target.value)}/>
           <Input type='text'placeholder='Status' value={status} className={'ticket__form__field'} onChange={e => setStatus(e.target.value)}/>
           <Input type='text'placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/>
-          <Button type='submit'> Add a new ticket </Button> 
+          <CursorButton type={'Pointer'} text={'Add a new ticket'} />
         </form>
       </Frame>
     )

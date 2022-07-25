@@ -9,18 +9,17 @@ import LoadingComponent from './LoadingComponent';
 const Board = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [ticketList, setTicketList] = useState([]);
-
   
 
   useEffect(() => {
     getTicketData();
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      getTicketData();
-    }, 2000);
-  }, [ticketList]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     getTicketData();
+  //   }, 2000);
+  // }, [ticketList]);
 
   const fakeTickets = [{title: 'Fix React useEffect', 
                     description: 'The useEffect in TicketPage needs to be fixed to avoid infinite loop.',
@@ -51,7 +50,7 @@ const Board = () => {
 
 
   const getCategoriesData = async () => {
-    const response = await fetch('https://localhost:7076/api/Categories/');
+    const response = await fetch('https://localhost:7076/api/Categories/name?Name=Fabryca');
     const data = await response.json();
     setCategoryList(data)
   }
