@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<FabrycaContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FabrycaContext") ?? throw new InvalidOperationException("Connection string 'FabrycaContext' not found.")));
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:FabrycaContext"] ?? throw new InvalidOperationException("Connection string 'FabrycaContext' not found.")));
 
 // Add services to the container.
 
