@@ -16,9 +16,9 @@ const Navbar = () => {
 
                 <div className="navbar__buttons">
                     <Button className="navbar__button"><Link to="/home">Home</Link></Button>
+                    <Button className="navbar__button"><Link to="/projects">Projects</Link></Button>
                     <Button className="navbar__button"><Link to="/faq">FAQ</Link></Button>
                     <Button className="navbar__button"><Link to="/privacy">Privacy</Link></Button>
-                    {/* <Button className="navbar__button"><Link to="/new">PHAddTicket</Link></Button> */}
                 </div>
 
             </Frame>

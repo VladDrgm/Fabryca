@@ -11,6 +11,7 @@ public class TicketToApi
     CategoryName = ticket.Category.Name;
     CreatedBy = ticket.CreatedBy;
     AssignedTo = ticket.AssignedTo;
+    ProjectId = ticket.ProjectId;
   }
   public TicketToApi() {}
 
@@ -22,4 +23,5 @@ public class TicketToApi
 
   public  string CreatedBy { get; set; }
   public string AssignedTo { get; set; }
+  public int? ProjectId { get; set; }
 }
