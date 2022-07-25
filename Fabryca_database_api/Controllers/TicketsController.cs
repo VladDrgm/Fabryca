@@ -34,15 +34,24 @@ namespace Fabryca_database_api.Controllers
         private bool TicketExists(int id) => (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
 
         // GET: api/FabrukaDb
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTicket()
+        [HttpGet("project/{projectName}")]
+        public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTickets(string projectName)
         {
+          // var result = new List<TicketToApi>();
+
           if (_context.Ticket == null)
           {
               return NotFound();
           }
-          var res =  DbToDTO(await _context.Ticket.Include(x => x.Category).ToListAsync());
-          return res;
+
+          var project = _context.Projects.FirstOrDefault(p => p.Name == projectName);
+          var result =  await _context.Ticket
+                                      .Include(x => x.Project)
+                                      .Where(x => x.Project == project)
+                                      .ToListAsync();
+          if (result == null || result.Count == 0) return NotFound("No items found");
+
+          return DbToDTO(result);
         }
 
         // GET: api/FabrukaDb/5
@@ -152,6 +161,8 @@ namespace Fabryca_database_api.Controllers
         public async Task<ActionResult<Ticket>> PostTicket(TicketCreation ticket)
         {
           Category category = await _context.Category.FirstOrDefaultAsync(x => x.Name == "Planned");
+          Project  project =  await _context.Projects.FirstOrDefaultAsync(x => x.Name == ticket.ProjectName);
+          if (project == null || project.Name.Length == 0) return BadRequest("Please add a project to the ticket!");
 
           var tick = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title);
 
@@ -173,7 +184,8 @@ namespace Fabryca_database_api.Controllers
                                         CreatedAt = DateTime.Parse(DateTime.Now.ToShortDateString()),
                                         CategoryId = category.Id,
                                         CreatedBy = ticket.CreatedBy,
-                                        AssignedTo  = ticket.AssignedTo
+                                        AssignedTo  = ticket.AssignedTo,
+                                        Project = project
                                       };
             if (_context.Ticket == null)
             {
