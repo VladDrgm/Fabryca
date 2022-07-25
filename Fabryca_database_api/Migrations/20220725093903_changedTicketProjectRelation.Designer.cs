@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fabryca_database_api.Migrations
 {
     [DbContext(typeof(FabrycaContext))]
-    [Migration("20220724180714_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220725093903_changedTicketProjectRelation")]
+    partial class changedTicketProjectRelation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,6 +89,9 @@ namespace Fabryca_database_api.Migrations
                         .HasMaxLength(1000000)
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -100,6 +103,8 @@ namespace Fabryca_database_api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ProjectId");
 
                     b.ToTable("Tickets");
                 });
@@ -123,7 +128,15 @@ namespace Fabryca_database_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Fabryca_database_api.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Project");
                 });
 #pragma warning restore 612, 618
         }

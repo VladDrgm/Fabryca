@@ -54,7 +54,8 @@ namespace Fabryca_database_api.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", maxLength: 1000000, nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AssignedTo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AssignedTo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,6 +66,11 @@ namespace Fabryca_database_api.Migrations
                         principalTable: "Category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tickets_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -76,6 +82,11 @@ namespace Fabryca_database_api.Migrations
                 name: "IX_Tickets_CategoryId",
                 table: "Tickets",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tickets_ProjectId",
+                table: "Tickets",
+                column: "ProjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

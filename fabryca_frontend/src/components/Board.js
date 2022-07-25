@@ -63,10 +63,10 @@ const Board = () => {
   return(
     <div className='board'>
       <LoadingComponent />
-      {categoryList.map(category =>
-        ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))}
-        {/* {fakeCategories.map(category =>
-        ( <CategoryCard ticketList={fakeTickets} setTicketList={setTicketList} category={category} key={category.name}/> ))} */}
+      {/* {categoryList.map(category =>
+        ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))} */}
+        {fakeCategories.map(category =>
+        ( <CategoryCard ticketList={fakeTickets} setTicketList={setTicketList} category={category} key={category.name}/> ))}
     </div>
   )
 }

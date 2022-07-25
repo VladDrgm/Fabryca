@@ -1,0 +1,16 @@
+.project__card--outer {
+    width: 70% !important;
+    align-self: center;
+    margin-bottom: 1em;
+  }
+.project__card--inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+.project__card__title {
+    margin-left: 0.5em;
+}
+.project__card__link {
+    margin-right: 0.5em;
+}
