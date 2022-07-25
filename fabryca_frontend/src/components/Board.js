@@ -15,11 +15,11 @@ const Board = () => {
     getTicketData();
   }, []);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     getTicketData();
-  //   }, 2000);
-  // }, [ticketList]);
+  useEffect(() => {
+    setTimeout(() => {
+      getTicketData();
+    }, 2000);
+  }, [ticketList]);
 
   const fakeTickets = [{title: 'Fix React useEffect', 
                     description: 'The useEffect in TicketPage needs to be fixed to avoid infinite loop.',
@@ -43,7 +43,7 @@ const Board = () => {
   const fakeCategories = [{id: 1, name: 'Planned'}, {id: 2, name: 'Ongoing'}, {id: 3, name: 'Completed'}]
 
   const getTicketData = async () => {
-    const response = await fetch('https://localhost:7076/api/Tickets/');
+    const response = await fetch('https://localhost:7076/api/Tickets/project/Fabryca');
     const data = await response.json();
     setTicketList(data)
   }
@@ -63,10 +63,10 @@ const Board = () => {
   return(
     <div className='board'>
       <LoadingComponent />
-      {/* {categoryList.map(category =>
-        ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))} */}
-        {fakeCategories.map(category =>
-        ( <CategoryCard ticketList={fakeTickets} setTicketList={setTicketList} category={category} key={category.name}/> ))}
+      {categoryList.map(category =>
+        ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))}
+        {/* {fakeCategories.map(category =>
+        ( <CategoryCard ticketList={fakeTickets} setTicketList={setTicketList} category={category} key={category.name}/> ))} */}
     </div>
   )
 }
