@@ -10,15 +10,17 @@ import CursorButton from './CursorButton';
     const [title, setTitle] = useState('');
     const [status, setStatus] = useState('');
     const [userList, setUserList] = useState(['Eirik', 'Vlad', 'Pontus'])
+    const projName = localStorage.getItem('projectName');
 
   
     const postToDatabase = async (newTicket) => {
 
       const body = JSON.stringify(newTicket);
 
-      await fetch('https://localhost:7076/api/Tickets',{
+      await fetch('https://fabrycaapi.azurewebsites.net/api/Tickets',{
         method: 'POST',
         mode: 'cors',
+        accept: 'text/plain',
         headers:{'Content-Type':'application/json'},
         body: body
       }).then(r=>r.json()).then(res=>{
@@ -35,14 +37,14 @@ import CursorButton from './CursorButton';
         Title: title,
         Status: status,
         Description: description,
-        ProjectName: 'Fabryca',
+        ProjectName: projName,
         createdBy: userList[Math.floor((Math.random()*userList.length))],
         assignedTo: userList[Math.floor((Math.random()*userList.length))]
         }
         
       postToDatabase(newTicket);
 
-      navigate('/home');
+      navigate(-1);
   
       setTitle('');
       setDescription('');
@@ -52,7 +54,7 @@ import CursorButton from './CursorButton';
     return(
       <Frame className='ticket__form__frame'>
         <form onSubmit={handleSubmit} className="ticket__form">
-          <h3 className='ticket__form__title'>Add a New Ticket</h3>
+          <h3 className='ticket__form__title'>Add a New Ticket to: {projName}</h3>
           <Input type='text' placeholder='Title' value={title} className={'ticket__form__field'} onChange={e => setTitle(e.target.value)}/>
           <Input type='text'placeholder='Status' value={status} className={'ticket__form__field'} onChange={e => setStatus(e.target.value)}/>
           <Input type='text'placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/>

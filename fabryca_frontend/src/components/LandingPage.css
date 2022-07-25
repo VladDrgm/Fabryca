@@ -1,0 +1,24 @@
+.outer__frame{
+    border-radius: 0.15em;
+    display: flex;
+    margin: 1em;
+    width: 70% !important;
+    align-self: center;
+}
+
+.inner__frame {
+    width: 100% !important;
+    padding-bottom: 1em;
+
+}
+.landing__body{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.landing__page__body__inner{
+
+}
+.landing__logo__img{
+    width: 15%;
+}

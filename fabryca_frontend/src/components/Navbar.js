@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import BurgerMenu from './BurgerMenu';
 import CursorButton from './CursorButton';
 
+import Logo from '../images/FabrycaV2.jpg';
+
 const Navbar = () => {
     return (
         <ThemeProvider>

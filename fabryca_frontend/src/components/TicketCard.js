@@ -10,7 +10,7 @@ import CursorButton from './CursorButton';
 const TicketCard = ({ticket, ticketList, setTicketList}) => {
 
   const deleteToDatabase = async () => {
-    const url = 'https://localhost:7076/api/Tickets/' + ticket.title
+    const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title
     
     const response = fetch(url,{
       method: 'DELETE',
@@ -26,7 +26,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   };
 
   const makeOngoing = () => {
-    const url = 'https://localhost:7076/api/Tickets/' + ticket.title + '/category?categoryName=Ongoing'
+    const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title + '/category?categoryName=Ongoing'
     
     fetch(url,{
       method: 'PUT',
@@ -39,7 +39,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   };
 
   const makePlanned = () => {
-    const url = 'https://localhost:7076/api/Tickets/' + ticket.title + '/category?categoryName=Planned'
+    const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title + '/category?categoryName=Planned'
     
     fetch(url,{
       method: 'PUT',
@@ -51,7 +51,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   };
 
   const makeCompleted = () => {
-    const url = 'https://localhost:7076/api/Tickets/' + ticket.title + '/category?categoryName=Completed'
+    const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title + '/category?categoryName=Completed'
     
     fetch(url,{
       method: 'PUT',

@@ -10,6 +10,7 @@ const ProjectCard = ({project}) => {
       localStorage.setItem('projectName', project.name);
       navigate('/project');
     }
+    
     return (
         <Frame padding={4} className="project__card--outer">
             <Frame boxShadow="in" className="project__card--inner">

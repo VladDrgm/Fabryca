@@ -14,7 +14,7 @@ import CursorButton from './CursorButton';
   
     const putToDatabase = async () => {
 
-      await fetch(`https://localhost:7076/api/Tickets/${oldTicketName}/ticket?newTitle=${title}&newStatus=${status}&newCategoryName=${category}&newDescription=${description}`,{
+      await fetch(`https://fabrycaapi.azurewebsites.net/api/Tickets/${oldTicketName}/ticket?newTitle=${title}&newStatus=${status}&newCategoryName=${category}&newDescription=${description}`,{
         method: 'PUT',
         mode: 'cors',
         headers:{'Content-Type':'application/json'}
