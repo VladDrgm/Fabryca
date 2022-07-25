@@ -17,14 +17,19 @@ const Navbar = () => {
 
                 <div className="navbar__buttons">
                     <Link to="/home"> 
-                        <CursorButton type={'Pointer'} text={'Home'} className="navbar__button" /> </Link>
+                        <CursorButton type={'Pointer'} text={'Home'} className="navbar__button" /> 
+                    </Link>
+                    <Link to="/projects">
+                        <CursorButton type={'Pointer'} text={'Projects'} className="navbar__button" />
+                    </Link>                                        
                     <Link to="/faq">
                         <CursorButton type={'Pointer'} text={'FAQ'} className="navbar__button" /> 
                     </Link>
                     <Link to="/privacy">
                         <CursorButton type={'Pointer'} text={'Privacy'} className="navbar__button" /> 
                     </Link>
-                    {/* <Button className="navbar__button"><Link to="/new">PHAddTicket</Link></Button> */}
+                    {/* <Button className="navbar__button"><Link to="/new">PHAddTicket</Link></Button> */}        
+
                 </div>
             </Frame>
         </ThemeProvider>
