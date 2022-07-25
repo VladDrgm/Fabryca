@@ -23,7 +23,8 @@ public class Ticket
 
   public string CreatedBy { get; set; }
   public string AssignedTo { get; set; }
+
   [ForeignKey("Project")]
-  public int? ProjectId { get; set; }
-  public Project? Project { get; set; }
+  public int ProjectId { get; set; }
+  public Project Project { get; set; }
 }

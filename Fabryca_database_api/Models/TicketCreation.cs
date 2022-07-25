@@ -19,4 +19,6 @@ public class TicketCreation
   public string CreatedBy { get; set; }
 
   public string AssignedTo { get; set; }
+
+  public string ProjectName { get; set; }
 }
