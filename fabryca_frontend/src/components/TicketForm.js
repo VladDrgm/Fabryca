@@ -35,6 +35,7 @@ import CursorButton from './CursorButton';
         Title: title,
         Status: status,
         Description: description,
+        ProjectName: 'Fabryca',
         createdBy: userList[Math.floor((Math.random()*userList.length))],
         assignedTo: userList[Math.floor((Math.random()*userList.length))]
         }
