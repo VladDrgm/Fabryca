@@ -130,19 +130,19 @@ namespace Fabryca_database_api.Controllers
           return NoContent();
         }
 
-        [HttpPut("{title}/ticket")]
-        public async Task<IActionResult> PutTicket(string title, string? newTitle, string? newStatus, string? newCategoryName, string? newDescription)
+        [HttpPut("{ticketTitle}/{projectName}/ticket")]
+        public async Task<IActionResult> PutTicket(string ticketTitle, string projectName, string newTitle, string? newStatus, string? newCategoryName, string? newDescription)
         {
-          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
+          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticketTitle);
           if (ticketToChange == null) return BadRequest();
 
-          var category = await _context.Category.FirstOrDefaultAsync(x => x.Name == newCategoryName);
+          var category = await _context.Category.Include(x => x.Project).FirstOrDefaultAsync(x => (x.Name == newCategoryName && x.Project.Name == projectName));
 
           if (category != null) ticketToChange.Category = category;
 
           if (!string.IsNullOrEmpty(newTitle))
           {
-            var test = await _context.Ticket.Where(x => x.Title != title).FirstOrDefaultAsync(x => x.Title == newTitle);
+            var test = await _context.Ticket.Where(x => x.Title != ticketTitle).FirstOrDefaultAsync(x => x.Title == newTitle);
             if (test != null) return BadRequest();
             ticketToChange.Title = newTitle;
           }
