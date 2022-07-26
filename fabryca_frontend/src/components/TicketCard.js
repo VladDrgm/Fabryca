@@ -91,7 +91,6 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   const navigate = useNavigate();
   const saveNameAndNavigate = (e) => {
     e.preventDefault();
-    localStorage.clear();
     localStorage.setItem('name', ticket.title);
     navigate('/edit');
   }
