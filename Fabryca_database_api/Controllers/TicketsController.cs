@@ -14,35 +14,20 @@ namespace Fabryca_database_api.Controllers
     public class TicketsController : ControllerBase
     {
         private readonly FabrycaContext _context;
+        private readonly TicketHelper _helper;
+
 
         public TicketsController(FabrycaContext context)
         {
             _context = context;
+            _helper = new TicketHelper(context);
         }
 
-        private List<TicketToApi> DbToDTO(List<Ticket> tickets)
-        {
-          var result = new List<TicketToApi>();
-
-          foreach (var ticket in tickets)
-          {
-            var temp = new TicketToApi(ticket);
-            result.Add(temp);
-          }
-          return result;
-        }
-        private bool TicketExists(int id) => (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
-
-        // GET: api/FabrukaDb
         [HttpGet("project/{projectName}")]
         public async Task<ActionResult<IEnumerable<TicketToApi>>> GetTickets(string projectName)
         {
-          // var result = new List<TicketToApi>();
 
-          if (_context.Ticket == null)
-          {
-              return NotFound();
-          }
+          if (_context.Ticket == null) return NotFound();
 
           var project = await _context.Projects.FirstOrDefaultAsync(p => p.Name == projectName);
 
@@ -54,10 +39,9 @@ namespace Fabryca_database_api.Controllers
 
           if (result == null || result.Count == 0) return NotFound("No items found");
 
-          return DbToDTO(result);
+          return _helper.DbToDTO(result);
         }
 
-        // GET: api/FabrukaDb/5
         [HttpGet("{title}")]
         public async Task<ActionResult<TicketToApi>> GetTicket(string title)
         {
@@ -73,6 +57,8 @@ namespace Fabryca_database_api.Controllers
         [HttpPut("{oldTitle}/title")]
         public async Task<IActionResult> PutTicketTitle(string oldTitle, string newTitle)
         {
+          if (String.IsNullOrEmpty(newTitle)) return BadRequest("Title cannot be empty");
+
           var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == oldTitle);
           if (ticketToChange == null) return BadRequest();
 
@@ -152,8 +138,9 @@ namespace Fabryca_database_api.Controllers
 
           _context.Entry(ticketToChange).State = EntityState.Modified;
           await _context.SaveChangesAsync();
+          // return NoContent();
 
-          return NoContent();
+          return CreatedAtAction("GetTicket", new { title = ticketToChange.Title }, new TicketToApi(ticketToChange));
         }
 
         [HttpPost]
@@ -198,7 +185,7 @@ namespace Fabryca_database_api.Controllers
             await _context.SaveChangesAsync();
           }
 
-            return CreatedAtAction("GetTicket", new { title = ticket.Title }, ticket);
+          return CreatedAtAction("GetTicket", new { title = ticket.Title }, ticket);
         }
 
         [HttpDelete("{title}")]
