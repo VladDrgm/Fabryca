@@ -25,6 +25,7 @@ const Board2 = ({projectName}) => {
     const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Tickets/project/${projectName}`);
     const data = await response.json();
     setTicketList(data)
+
   }
 
 
@@ -32,6 +33,7 @@ const Board2 = ({projectName}) => {
     const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/name?Name=${projectName}`);
     const data = await response.json();
     setCategoryList(data)
+
   }
 
   useEffect(() => {
