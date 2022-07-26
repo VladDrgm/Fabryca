@@ -48,7 +48,8 @@ const CategoryCard = ({category, ticketList, setTicketList}) => {
     <Frame padding={4} className='planned category'>
     <Frame boxShadow="in" className='category__inner'>
     <header className='category__header' onClick={toggleCategory}> 
-      <h3>{category.name} {arrowSymbol}</h3> 
+      <h3>{category.name} </h3> 
+      {arrowSymbol}
     </header>
       <CursorButton type={'Pointer'} text={'Delete Category'} onClick={deleteCategory} className="delete__category"/>
     <section className={showCategory === true ? 'category__list--show' : 'category__list--hidden'}>

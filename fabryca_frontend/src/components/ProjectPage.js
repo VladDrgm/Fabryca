@@ -4,7 +4,7 @@ import '../index.css';
 import React from 'react'; 
 import Navbar from './Navbar';
 import {  ThemeProvider, Frame } from '@react95/core'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Board2 from './Board2';
 import CursorButton from './CursorButton';
 
@@ -13,7 +13,21 @@ import CursorButton from './CursorButton';
 function ProjectPage() {
     // const [ticketList, setTicketList] = useState([]);
     const projName = localStorage.getItem('projectName');
+    const navigate = useNavigate();
     
+    const deleteProject = async () => {
+      const url = `https://fabrycaapi.azurewebsites.net/api/Projects/${projName}`;
+    
+      const response = fetch(url,{
+        method: 'DELETE',
+        mode: 'cors',
+        headers:{'Content-type':'application/json'}
+        }
+      )
+      if ((await response).ok) {
+        navigate('/projects')
+      }
+    }
 
     // const getProjectData = async () => {
     //     console.log(projName);
@@ -41,6 +55,9 @@ function ProjectPage() {
         <Link to="/newCategory">
           <CursorButton type={'Pointer'} text={'Add a Category'} className="category__button" />
         </Link>
+        
+          <CursorButton type={'Pointer'} text={'Add a Category'} className="category__button" onClick={deleteProject} />
+        
         </div>
         <Board2 projectName={projName}></Board2>
       </div>

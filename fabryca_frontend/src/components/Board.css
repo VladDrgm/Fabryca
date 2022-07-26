@@ -29,11 +29,11 @@
 .category__header {
   border: black solid 0.4px;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
   height: 2em;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding-left: 1em;
   font-size: x-large;
 }
 
