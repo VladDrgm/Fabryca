@@ -59,7 +59,10 @@ namespace Fabryca_database_api.Controllers
         {
           if (String.IsNullOrEmpty(newTitle)) return BadRequest("Title cannot be empty");
 
-          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == oldTitle);
+          var ticketToChange = await _context.Ticket
+                                              .Include(x => x.Category)
+                                              .Include(x => x.Project)
+                                              .FirstOrDefaultAsync(x => x.Title == oldTitle);
           if (ticketToChange == null) return BadRequest();
 
           ticketToChange.Title = newTitle;
@@ -67,13 +70,16 @@ namespace Fabryca_database_api.Controllers
 
           await _context.SaveChangesAsync();
 
-          return NoContent();
+          return CreatedAtAction("GetTicket", new { title = ticketToChange.Title }, new TicketToApi(ticketToChange));
         }
 
         [HttpPut("{title}/description")]
         public async Task<IActionResult> PutTicketDescription(string title, string description)
         {
-          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
+          var ticketToChange = await _context.Ticket
+                                              .Include(x => x.Category)
+                                              .Include(x => x.Project)
+                                              .FirstOrDefaultAsync(x => x.Title == title);
           if (ticketToChange == null) return BadRequest();
 
           ticketToChange.Description = description;
@@ -81,13 +87,16 @@ namespace Fabryca_database_api.Controllers
 
           await _context.SaveChangesAsync();
 
-          return NoContent();
+          return CreatedAtAction("GetTicket", new { title = ticketToChange.Title }, new TicketToApi(ticketToChange));
         }
 
         [HttpPut("{title}/status")]
         public async Task<IActionResult> PutTicketStatus(string title, string status)
         {
-          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
+          var ticketToChange = await _context.Ticket
+                                            .Include(x => x.Category)
+                                            .Include(x => x.Project)
+                                            .FirstOrDefaultAsync(x => x.Title == title);
           if (ticketToChange == null) return BadRequest();
 
           ticketToChange.Status = status;
@@ -95,16 +104,20 @@ namespace Fabryca_database_api.Controllers
 
           await _context.SaveChangesAsync();
 
-          return NoContent();
+          return CreatedAtAction("GetTicket", new { title = ticketToChange.Title }, new TicketToApi(ticketToChange));
         }
 
         [HttpPut("{projectName}/{ticketTitle}/category")]
         public async Task<IActionResult> PutTicketCategory(string projectName, string ticketTitle,  string categoryName)
         {
+
           var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticketTitle);
+
           if (ticketToChange == null) return BadRequest("Ticket does not exist.");
 
-          var category = await _context.Category.Include(x => x.Project).FirstOrDefaultAsync(x => (x.Name == categoryName && x.Project.Name == projectName));
+          var category = await _context.Category
+                                        .Include(x => x.Project)
+                                        .FirstOrDefaultAsync(x => (x.Name == categoryName && x.Project.Name == projectName));
 
           if ( category != null)
           {
@@ -113,7 +126,7 @@ namespace Fabryca_database_api.Controllers
             await _context.SaveChangesAsync();
           }
 
-          return NoContent();
+          return CreatedAtAction("GetTicket", new { title = ticketToChange.Title }, new TicketToApi(ticketToChange));
         }
 
         [HttpPut("{ticketTitle}/{projectName}/ticket")]
@@ -138,7 +151,6 @@ namespace Fabryca_database_api.Controllers
 
           _context.Entry(ticketToChange).State = EntityState.Modified;
           await _context.SaveChangesAsync();
-          // return NoContent();
 
           return CreatedAtAction("GetTicket", new { title = ticketToChange.Title }, new TicketToApi(ticketToChange));
         }
