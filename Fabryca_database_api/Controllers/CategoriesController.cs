@@ -79,7 +79,7 @@ namespace Fabryca_database_api.Controllers
             var newCategory = new Category { Name = categoryName, Project = project };
             _context.Category.Add(newCategory);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetCategory", new { name = newCategory.Name }, newCategory);
+            return CreatedAtAction("GetCategory", new { projectName = newCategory.Name, name = projectName }, newCategory);
           }
           return NoContent();
 
