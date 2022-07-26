@@ -1,8 +1,7 @@
 import '../App.css';
 import React from 'react'; 
 import Navbar from './Navbar';
-import { Button, ThemeProvider } from '@react95/core'
-import { Link } from 'react-router-dom';
+import {  ThemeProvider } from '@react95/core'
 import { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 

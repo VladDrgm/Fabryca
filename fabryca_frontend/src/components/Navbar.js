@@ -1,10 +1,9 @@
 import './Navbar.css'
-import { Frame, Button, ThemeProvider } from '@react95/core';
+import { Frame, ThemeProvider } from '@react95/core';
 import { Link } from 'react-router-dom';
 import BurgerMenu from './BurgerMenu';
 import CursorButton from './CursorButton';
 
-import Logo from '../images/FabrycaV2.jpg';
 
 const Navbar = () => {
     return (
