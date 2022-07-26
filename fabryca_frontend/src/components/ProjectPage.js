@@ -3,9 +3,8 @@ import './ProjectPage.css';
 import '../index.css';
 import React from 'react'; 
 import Navbar from './Navbar';
-import { Button, ThemeProvider, Frame, TitleBar } from '@react95/core'
-import { Link, useNaviagate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import {  ThemeProvider, Frame } from '@react95/core'
+import { Link } from 'react-router-dom';
 import Board2 from './Board2';
 import CursorButton from './CursorButton';
 

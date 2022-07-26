@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { Frame, Input, Button} from '@react95/core'
+import React, { useState} from 'react';
+import { Frame, Input} from '@react95/core'
 import './TicketForm.css';
 import { useNavigate } from 'react-router-dom';
 import CursorButton from './CursorButton';
@@ -9,7 +9,7 @@ import CursorButton from './CursorButton';
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
     const [status, setStatus] = useState('');
-    const [userList, setUserList] = useState(['Eirik', 'Vlad', 'Pontus'])
+    const [userList] = useState(['Eirik', 'Vlad', 'Pontus'])
     const projName = localStorage.getItem('projectName');
 
   
@@ -18,7 +18,7 @@ import CursorButton from './CursorButton';
       const body = JSON.stringify(newTicket);
 
       const actualLink = 'https://fabrycaapi.azurewebsites.net/api/Tickets';
-      const localLink = 'https://localhost:7076/api/Tickets'; //to be removed
+      // const localLink = 'https://localhost:7076/api/Tickets'; //to be removed
       await fetch(actualLink,{
         method: 'POST',
         mode: 'cors',

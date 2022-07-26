@@ -1,4 +1,4 @@
-import { Button, ThemeProvider, ProgressBar, Frame } from '@react95/core';
+import { ThemeProvider, ProgressBar, Frame } from '@react95/core';
 import '@react95/icons/icons.css';
 import { useEffect, useState } from 'react';
 import './LoadingComponent.css'

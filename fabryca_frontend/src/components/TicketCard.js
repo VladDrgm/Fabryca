@@ -1,8 +1,7 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useState} from 'react';
 import './TicketCard.css';
 import './Board.css';
-import { Button } from '@react95/core';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '@react95/icons/icons.css';
 import { Progman46, Progman43 } from '@react95/icons'
 import CursorButton from './CursorButton';
@@ -19,7 +18,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
       }
     )
     if ((await response).ok) {
-      const newList = ticketList.filter( t => t.title != ticket.title);
+      const newList = ticketList.filter( t => t.title !== ticket.title);
       console.log(newList);
       setTicketList(newList)
     }
