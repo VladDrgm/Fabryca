@@ -9,6 +9,7 @@ public class TicketCreation
     Description = ticket.Description;
     CreatedBy = ticket.CreatedBy;
     AssignedTo = ticket.AssignedTo;
+    ProjectName = ticket.ProjectName;
   }
   public TicketCreation() {}
 

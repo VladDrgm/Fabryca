@@ -6,7 +6,7 @@ import CategoryCard from './CategoryCard';
 import LoadingComponent from './LoadingComponent';
 
 
-const Board = () => {
+const Board2 = ({projectName}) => {
   const [categoryList, setCategoryList] = useState([]);
   const [ticketList, setTicketList] = useState([]);
   
@@ -20,16 +20,16 @@ const Board = () => {
       getTicketData();
     }, 2000);
   }, [ticketList]);
-  
+
   const getTicketData = async () => {
-    const response = await fetch('https://localhost:7076/api/Tickets/project/Fabryca');
+    const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Tickets/project/${projectName}`);
     const data = await response.json();
     setTicketList(data)
   }
 
 
   const getCategoriesData = async () => {
-    const response = await fetch('https://fabrycaapi.azurewebsites.net/api/Categories/name?Name=Fabryca');
+    const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/name?Name=${projectName}`);
     const data = await response.json();
     setCategoryList(data)
   }
@@ -41,11 +41,10 @@ const Board = () => {
   
   return(
     <div className='board'>
-      <LoadingComponent />
       {categoryList.map(category =>
         ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))}
-     </div>
+    </div>
   )
 }
 
-export default Board;
+export default Board2;

@@ -1,0 +1,17 @@
+.project__page__title {
+    width: 70% !important;
+    align-self: center;
+}
+.project__page--no-tickets{
+    margin-top: 1em;
+    align-self: center;
+    width: 70% !important;
+}
+.project__page__buttons{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+.project__page__button{
+    margin: 1em;
+}
