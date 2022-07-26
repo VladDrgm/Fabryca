@@ -34,7 +34,7 @@ const Board2 = ({projectName}) => {
     const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/${projectName}`);
     const data = await response.json();
     setCategoryList(data);
-     return data;
+    return data;
   }
 
   // useEffect(() => {

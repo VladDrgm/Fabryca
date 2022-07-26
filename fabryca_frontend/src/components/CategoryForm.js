@@ -10,8 +10,8 @@ import CursorButton from './CursorButton';
     const projName = localStorage.getItem('projectName');
   
     const postToDatabase = async () => {
-
-      await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/${projName}/${name}`,{
+      // https://fabrycaapi.azurewebsites.net
+      await fetch(`https://localhost:7076/api/Categories/${projName}/${name}`,{
         method: 'POST',
         mode: 'cors',
         headers:{'Content-Type':'application/json'}
@@ -21,18 +21,19 @@ import CursorButton from './CursorButton';
         }
       });
       localStorage.clear();
-  
+      
     }
+
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
       e.preventDefault();
-        
+      
       postToDatabase();
-  
+      
       setName('');
       navigate(-1);
     }
-
+    
     return(
       <Frame className='ticket__form__frame'>
         <form onSubmit={handleSubmit} className="ticket__form">
