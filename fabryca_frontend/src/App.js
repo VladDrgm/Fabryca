@@ -15,7 +15,8 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
 function App() { 
-
+  const projName = localStorage.getItem('projectName');
+  const projectUrl = "/project/" + projName;
 
   return (
 
