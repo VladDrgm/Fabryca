@@ -23,6 +23,7 @@ import CursorButton from './CursorButton';
         if(res){
           console.log(res);
         }
+        navigate('/projects');
       });
   
     }
@@ -35,7 +36,7 @@ import CursorButton from './CursorButton';
         
       postToDatabase(newProject);
 
-      navigate('/projects');
+      // navigate('/projects');
   
       setName('');
     }
