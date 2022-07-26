@@ -10,7 +10,7 @@ import CursorButton from './CursorButton';
     const projName = localStorage.getItem('projectName');
   
     const postToDatabase = async () => {
-      
+
       await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/${projName}/${name}`,{
         method: 'POST',
         mode: 'cors',
