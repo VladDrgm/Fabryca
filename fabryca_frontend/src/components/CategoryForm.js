@@ -18,9 +18,10 @@ import CursorButton from './CursorButton';
       }).then(r=>r.json()).then(res=>{
         if(res){
           console.log(res);
+          setName('');
+          navigate(-1);
         }
       });
-      localStorage.clear();
       
     }
 
@@ -30,8 +31,6 @@ import CursorButton from './CursorButton';
       
       postToDatabase();
       
-      setName('');
-      navigate(-1);
     }
     
     return(
