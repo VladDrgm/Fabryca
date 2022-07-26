@@ -1,9 +1,7 @@
 import React from 'react'; 
 import {useState, useEffect } from 'react';
 import './Board.css'
-import { Frame } from '@react95/core'
 import CategoryCard from './CategoryCard';
-import LoadingComponent from './LoadingComponent';
 
 
 const Board2 = ({projectName}) => {
@@ -30,7 +28,7 @@ const Board2 = ({projectName}) => {
 
 
   const getCategoriesData = async () => {
-    const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/name?Name=${projectName}`);
+    const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/${projectName}`);
     const data = await response.json();
     setCategoryList(data)
 

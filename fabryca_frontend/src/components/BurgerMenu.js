@@ -3,7 +3,7 @@ import { slide as Menu } from 'react-burger-menu';
 import './BurgerMenu.css'
 import { Link } from 'react-router-dom';
 
-export default props => {
+const props = () => {
     return (
         <Menu>
            <Link className="menu-item" to="/home">Home</Link>
@@ -13,3 +13,5 @@ export default props => {
         </Menu>
     );
 };
+
+export default props;

@@ -1,7 +1,7 @@
 import '../App.css';
 import React from 'react'; 
 import Navbar from './Navbar';
-import { Button, ThemeProvider } from '@react95/core';
+import {  ThemeProvider } from '@react95/core';
 import EditTicketForm from './EditTicketForm';
 
 function EditTicketPage() {
