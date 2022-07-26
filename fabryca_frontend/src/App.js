@@ -1,13 +1,7 @@
 import './App.css';
 import './index.css';
 import React from 'react'; 
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import { Button, ThemeProvider } from '@react95/core'
-import TicketCard from './components/TicketCard';
 import NewTicketPage from './components/NewTicketPage';
-import Board from './components/Board';
-import BoardPage from './components/BoardPage';
 import LandingPage from './components/LandingPage';
 import PrivacyPage from './components/PrivacyPage';
 import FaqPage from './components/FaqPage';
@@ -16,7 +10,7 @@ import ProjectsPage from './components/ProjectsPage';
 import ProjectPage from './components/ProjectPage';
 import NewProjectPage from './components/NewProjectPage';
 import NewCategoryPage from './components/NewCategoryPage';
-import { BrowserRouter as Router, Routes, Route, Redirect} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
 
