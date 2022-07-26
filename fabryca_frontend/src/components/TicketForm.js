@@ -17,7 +17,9 @@ import CursorButton from './CursorButton';
 
       const body = JSON.stringify(newTicket);
 
-      await fetch('https://fabrycaapi.azurewebsites.net/api/Tickets',{
+      const actualLink = 'https://fabrycaapi.azurewebsites.net/api/Tickets';
+      const localLink = 'https://localhost:7076/api/Tickets'; //to be removed
+      await fetch(actualLink,{
         method: 'POST',
         mode: 'cors',
         accept: 'text/plain',
