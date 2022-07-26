@@ -11,12 +11,14 @@ const Board2 = ({projectName}) => {
 
   useEffect(() => {
     getTicketData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     setTimeout(() => {
       getTicketData();
     }, 2000);
+    // eslint-disable-next-line
   }, [ticketList]);
 
   const getTicketData = async () => {
@@ -37,6 +39,7 @@ const Board2 = ({projectName}) => {
   useEffect(() => {
     getCategoriesData()
     console.log(categoryList)
+    // eslint-disable-next-line
   }, []);
   
   return(
