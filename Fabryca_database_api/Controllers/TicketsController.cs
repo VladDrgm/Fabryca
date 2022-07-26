@@ -142,6 +142,7 @@ namespace Fabryca_database_api.Controllers
           var category = await _context.Category.Include(x => x.Project)
                                                 .FirstOrDefaultAsync(x => (x.Name == newCategoryName && x.Project.Name == projectName));
 
+
           if (category != null) ticketToChange.Category = category;
 
           if (!string.IsNullOrEmpty(newTitle))
