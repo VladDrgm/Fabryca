@@ -25,7 +25,7 @@ jobs:
         run: |
           cd fabryca_frontend
           npm install
-          npm run build --if-present
+          CI=false npm run build --if-present
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
