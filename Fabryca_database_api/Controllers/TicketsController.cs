@@ -63,15 +63,13 @@ namespace Fabryca_database_api.Controllers
         {
           if (_context.Ticket == null) return NotFound();
 
-          var ticket = await _context.Ticket.Include(x => x.Category).FirstOrDefaultAsync(x => x.Title == title);
+          var ticket = await _context.Ticket.Include(x => x.Category).Include(x => x.Project).FirstOrDefaultAsync(x => x.Title == title);
 
           if (ticket == null) return NotFound();
 
           return new TicketToApi(ticket);
         }
 
-        // PUT: api/FabrukaDb/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{oldTitle}/title")]
         public async Task<IActionResult> PutTicketTitle(string oldTitle, string newTitle)
         {
@@ -114,13 +112,14 @@ namespace Fabryca_database_api.Controllers
           return NoContent();
         }
 
-        [HttpPut("{title}/category")]
-        public async Task<IActionResult> PutTicketCategory(string title, string categoryName)
+        [HttpPut("{projectName}/{ticketTitle}/category")]
+        public async Task<IActionResult> PutTicketCategory(string projectName, string ticketTitle,  string categoryName)
         {
-          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
-          if (ticketToChange == null) return BadRequest();
+          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticketTitle);
+          if (ticketToChange == null) return BadRequest("Ticket does not exist.");
 
-          var category = await _context.Category.FirstOrDefaultAsync(x => x.Name == categoryName);
+          var category = await _context.Category.Include(x => x.Project).FirstOrDefaultAsync(x => (x.Name == categoryName && x.Project.Name == projectName));
+
           if ( category != null)
           {
             ticketToChange.Category = category;
@@ -139,14 +138,15 @@ namespace Fabryca_database_api.Controllers
 
           var category = await _context.Category.FirstOrDefaultAsync(x => x.Name == newCategoryName);
 
-
           if (category != null) ticketToChange.Category = category;
+
           if (!string.IsNullOrEmpty(newTitle))
           {
             var test = await _context.Ticket.Where(x => x.Title != title).FirstOrDefaultAsync(x => x.Title == newTitle);
             if (test != null) return BadRequest();
             ticketToChange.Title = newTitle;
           }
+
           if (!string.IsNullOrEmpty(newStatus)) ticketToChange.Status = newStatus;
           if (!string.IsNullOrEmpty(newDescription)) ticketToChange.Description = newDescription;
 
@@ -156,24 +156,25 @@ namespace Fabryca_database_api.Controllers
           return NoContent();
         }
 
-
-
-        // POST: api/FabrykaDb
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Ticket>> PostTicket(TicketCreation ticket)
         {
           if (String.IsNullOrEmpty(ticket.Title)) return BadRequest("Please choose a unique title for the ticket.");
-          Project  project =  await _context.Projects.FirstOrDefaultAsync(x => x.Name == ticket.ProjectName);
-          Category category = await _context.Category.Include(x => x.Project).Where(x => x.Project.Name == ticket.ProjectName).FirstOrDefaultAsync(x => x.Name == "Planned");
+
+          Project  project =  await _context.Projects
+                                            .FirstOrDefaultAsync(x => x.Name == ticket.ProjectName);
+
+          Category category = await _context.Category
+                                            .Include(x => x.Project)
+                                            .Where(x => x.Project.Name == ticket.ProjectName)
+                                            .FirstOrDefaultAsync(x => x.Name == "Planned");
+
           if (project == null || project.Name.Length == 0) return BadRequest("Please add a project to the ticket!");
+          if (category == null || category.Name.Length == 0) return BadRequest("Please create <Planned> category for the ticket!");
 
           var tick = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title);
 
-          if (tick != null)
-          {
-            return BadRequest("Please choose a unique title for the ticket.");
-          }
+          if (tick != null) return BadRequest("Please choose a unique title for the ticket.");
 
           var DbTicket = new Ticket();
 
@@ -191,19 +192,15 @@ namespace Fabryca_database_api.Controllers
                                         AssignedTo  = ticket.AssignedTo,
                                         Project = project
                                       };
-            if (_context.Ticket == null)
-            {
-                return Problem("Entity set 'FabrycaContext.Ticket'  is null.");
-            }
-              _context.Ticket.Add(DbTicket);
-              await _context.SaveChangesAsync();
-          }
+            if (_context.Ticket == null) return Problem("Entity set 'FabrycaContext.Ticket'  is null.");
 
+            _context.Ticket.Add(DbTicket);
+            await _context.SaveChangesAsync();
+          }
 
             return CreatedAtAction("GetTicket", new { title = ticket.Title }, ticket);
         }
 
-        // DELETE: api/FabrukaDb/5
         [HttpDelete("{title}")]
         public async Task<IActionResult> DeleteTicket(string title)
         {
