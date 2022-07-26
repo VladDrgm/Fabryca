@@ -110,14 +110,18 @@ namespace Fabryca_database_api.Controllers
         [HttpPut("{projectName}/{ticketTitle}/category")]
         public async Task<IActionResult> PutTicketCategory(string projectName, string ticketTitle,  string categoryName)
         {
-
-          var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticketTitle);
+          var ticketToChange = await _context.Ticket
+                                    .Include(x => x.Category)
+                                    .Include(x => x.Project)
+                                    .FirstOrDefaultAsync(x => (x.Project.Name == projectName &&
+                                                               x.Title == ticketTitle));
 
           if (ticketToChange == null) return BadRequest("Ticket does not exist.");
 
           var category = await _context.Category
                                         .Include(x => x.Project)
-                                        .FirstOrDefaultAsync(x => (x.Name == categoryName && x.Project.Name == projectName));
+                                        .FirstOrDefaultAsync(x => (x.Name == categoryName &&
+                                                                  x.Project.Name == projectName));
 
           if ( category != null)
           {
@@ -135,7 +139,8 @@ namespace Fabryca_database_api.Controllers
           var ticketToChange = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticketTitle);
           if (ticketToChange == null) return BadRequest();
 
-          var category = await _context.Category.Include(x => x.Project).FirstOrDefaultAsync(x => (x.Name == newCategoryName && x.Project.Name == projectName));
+          var category = await _context.Category.Include(x => x.Project)
+                                                .FirstOrDefaultAsync(x => (x.Name == newCategoryName && x.Project.Name == projectName));
 
           if (category != null) ticketToChange.Category = category;
 
@@ -160,10 +165,10 @@ namespace Fabryca_database_api.Controllers
         {
           if (String.IsNullOrEmpty(ticket.Title)) return BadRequest("Please choose a unique title for the ticket.");
 
-          Project  project =  await _context.Projects
+          var  project =  await _context.Projects
                                             .FirstOrDefaultAsync(x => x.Name == ticket.ProjectName);
 
-          Category category = await _context.Category
+          var category = await _context.Category
                                             .Include(x => x.Project)
                                             .Where(x => x.Project.Name == ticket.ProjectName)
                                             .FirstOrDefaultAsync(x => x.Name == "Planned");
@@ -191,7 +196,7 @@ namespace Fabryca_database_api.Controllers
                                         AssignedTo  = ticket.AssignedTo,
                                         Project = project
                                       };
-            if (_context.Ticket == null) return Problem("Entity set 'FabrycaContext.Ticket'  is null.");
+            if (_context.Ticket == null) return Problem("Entity set 'FabrycaContext.Ticket' is null.");
 
             _context.Ticket.Add(DbTicket);
             await _context.SaveChangesAsync();
@@ -203,15 +208,11 @@ namespace Fabryca_database_api.Controllers
         [HttpDelete("{title}")]
         public async Task<IActionResult> DeleteTicket(string title)
         {
-            if (_context.Ticket == null)
-            {
-                return NotFound();
-            }
+            if (_context.Ticket == null) return NotFound();
+
             var ticket = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == title);
-            if (ticket == null)
-            {
-                return NotFound();
-            }
+
+            if (ticket == null) return NotFound();
 
             _context.Ticket.Remove(ticket);
             await _context.SaveChangesAsync();
