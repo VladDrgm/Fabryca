@@ -21,6 +21,7 @@ const CategoryCard = ({category, ticketList, setTicketList}) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ticketList]);
   const [showCategory, setShowCategory] = useState(false);
+
   const toggleCategory = () => {
     setShowCategory(!showCategory);
   }
@@ -36,6 +37,8 @@ const CategoryCard = ({category, ticketList, setTicketList}) => {
       }
     )
     if ((await response).ok) {
+
+      window.location.reload();
       // const newList = ticketList.filter( t => t.title != ticket.title);
       // console.log(newList);
       // setTicketList(newList)

@@ -56,7 +56,7 @@ function ProjectPage() {
           <CursorButton type={'Pointer'} text={'Add a Category'} className="category__button" />
         </Link>
         
-          <CursorButton type={'Pointer'} text={'Add a Category'} className="category__button" onClick={deleteProject} />
+          <CursorButton type={'Pointer'} text={'Delete Project'} className="category__button" onClick={deleteProject} />
         
         </div>
         <Board2 projectName={projName}></Board2>
