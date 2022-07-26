@@ -7,6 +7,7 @@ import { Progman46, Progman43 } from '@react95/icons'
 import CursorButton from './CursorButton';
 
 const TicketCard = ({ticket, ticketList, setTicketList}) => {
+  const projName = localStorage.getItem('projectName');
 
   const deleteToDatabase = async () => {
     const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title
@@ -25,7 +26,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   };
 
   const makeOngoing = () => {
-    const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title + '/category?categoryName=Ongoing'
+    const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=Ongoing`;
     
     fetch(url,{
       method: 'PUT',
@@ -38,8 +39,8 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   };
 
   const makePlanned = () => {
-    const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title + '/category?categoryName=Planned'
-    
+     const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=Planned`;
+
     fetch(url,{
       method: 'PUT',
       mode: 'cors',
@@ -50,8 +51,8 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   };
 
   const makeCompleted = () => {
-    const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title + '/category?categoryName=Completed'
-    
+    const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=Completed`;
+
     fetch(url,{
       method: 'PUT',
       mode: 'cors',
