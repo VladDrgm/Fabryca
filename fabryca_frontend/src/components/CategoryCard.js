@@ -25,7 +25,7 @@ const CategoryCard = ({category, ticketList, setTicketList}) => {
   }
 
   const deleteCategory = async () => {
-    const url = `https://fabrycaapi.azurewebsites.net/api/Categories/${category.name}`;
+    const url = `https://fabrycaapi.azurewebsites.net/api/Categories/${localStorage.getItem('projectName')}/${category.name}`;
     
     const response = fetch(url,{
       method: 'DELETE',
