@@ -11,10 +11,11 @@ import CursorButton from './CursorButton';
     const [status, setStatus] = useState('');
     const [category, setCategory] = useState('');
     const oldTicketName = localStorage.getItem('name');
+    const projName = localStorage.getItem('projectName');
   
     const putToDatabase = async () => {
 
-      await fetch(`https://fabrycaapi.azurewebsites.net/api/Tickets/${oldTicketName}/ticket?newTitle=${title}&newStatus=${status}&newCategoryName=${category}&newDescription=${description}`,{
+      await fetch(`https://fabrycaapi.azurewebsites.net/api/Tickets/${oldTicketName}/${projName}/ticket?newTitle=${title}&newStatus=${status}&newCategoryName=${category}&newDescription=${description}`,{
         method: 'PUT',
         mode: 'cors',
         headers:{'Content-Type':'application/json'}
