@@ -164,8 +164,8 @@ namespace Fabryca_database_api.Controllers
         public async Task<ActionResult<Ticket>> PostTicket(TicketCreation ticket)
         {
           if (String.IsNullOrEmpty(ticket.Title)) return BadRequest("Please choose a unique title for the ticket.");
-          Category category = await _context.Category.FirstOrDefaultAsync(x => x.Name == "Planned");
           Project  project =  await _context.Projects.FirstOrDefaultAsync(x => x.Name == ticket.ProjectName);
+          Category category = await _context.Category.Include(x => x.Project).Where(x => x.Project.Name == ticket.ProjectName).FirstOrDefaultAsync(x => x.Name == "Planned");
           if (project == null || project.Name.Length == 0) return BadRequest("Please add a project to the ticket!");
 
           var tick = await _context.Ticket.FirstOrDefaultAsync(x => x.Title == ticket.Title);
