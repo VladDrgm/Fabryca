@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import './ProjectCard.css';
 import { Frame, Button } from '@react95/core';
 

@@ -1,7 +1,7 @@
 import Navbar from './Navbar';
 import './LandingPage.css';
 import '../index.css';
-import { Frame, ThemeProvider, Button } from '@react95/core';
+import { Frame, ThemeProvider } from '@react95/core';
 import { Link } from 'react-router-dom';
 import CursorButton from './CursorButton';
 import Logo from '../images/FabrycaV2.jpg';

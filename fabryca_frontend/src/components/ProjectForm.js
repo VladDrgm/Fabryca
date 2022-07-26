@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { Frame, Input, Button} from '@react95/core'
+import React, { useState} from 'react';
+import { Frame, Input } from '@react95/core'
 import './TicketForm.css';
 import { useNavigate } from 'react-router-dom';
 import CursorButton from './CursorButton';
