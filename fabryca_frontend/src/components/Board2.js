@@ -24,14 +24,15 @@ const Board2 = ({projectName}) => {
   const getTicketData = async () => {
     const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Tickets/project/${projectName}`);
     const data = await response.json();
-    setTicketList(data)
+    setTicketList(data);
   }
 
 
   const getCategoriesData = async () => {
-    const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/name?Name=${projectName}`);
+    const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/${projectName}`);
     const data = await response.json();
     setCategoryList(data)
+    console.log(categoryList);
   }
 
   useEffect(() => {
