@@ -37,7 +37,6 @@ import CursorButton from './CursorButton';
       <Frame className='ticket__form__frame'>
         <form onSubmit={handleSubmit} className="ticket__form">
           <h3 className='ticket__form__title'>Add a New Category to: {projName}</h3>
-          <h4>Title:</h4>
           <Input type='text' placeholder='Title' value={name} className={'ticket__form__field'} onChange={e => setName(e.target.value)}/>
           <CursorButton type={'Pointer'} text={'Add Category'} />
         </form>

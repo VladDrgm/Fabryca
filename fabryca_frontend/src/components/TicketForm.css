@@ -11,6 +11,8 @@
 
 .ticket__form__field {
     width: 90%;
+    max-width: 90%;
+    min-width: 90%;
     margin-bottom: 1em;
 }
 
