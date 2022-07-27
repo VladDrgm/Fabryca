@@ -4,7 +4,7 @@ import '../index.css';
 import { Frame, ThemeProvider } from '@react95/core';
 import { Link } from 'react-router-dom';
 import CursorButton from './CursorButton';
-// import Logo from '../images/FabrycaV2.jpg';
+import Logo from '../images/FabrycaV2.jpg';
 
 const LandingPage = () => {
 
