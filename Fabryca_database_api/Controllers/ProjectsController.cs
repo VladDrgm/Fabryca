@@ -49,12 +49,10 @@ namespace Fabryca_database_api.Controllers
         public async Task<ActionResult<Project>> PostProject(ProjectCreation project)
         {
           if (String.IsNullOrEmpty(project.Name)) return BadRequest("Please choose a unique title for the project.");
+
           var tick = await _context.Projects.FirstOrDefaultAsync(x => x.Name == project.Name);
 
-          if (tick != null)
-          {
-            return BadRequest("Please choose a unique title for the project.");
-          }
+          if (tick != null) return BadRequest("Please choose a unique title for the project.");
 
           var DbProject = new Project();
 
@@ -62,20 +60,17 @@ namespace Fabryca_database_api.Controllers
           {
             DbProject = new Project { 
                                         Name = project.Name
-                                      };
-            if (_context.Projects == null)
-            {
-                return Problem("Entity set 'FabrycaContext.Projects'  is null.");
-            }
-              _context.Projects.Add(DbProject);
+                                    };
+            if (_context.Projects == null) return Problem("Entity set 'FabrycaContext.Projects' is null.");
+
+            _context.Category.Add(new Category{ Name = "Planned", Project = DbProject, });
+            _context.Projects.Add(DbProject);
               await _context.SaveChangesAsync();
           }
-            return Ok(project);
+
+          return Ok(project);
         }
 
-    //     }
-
-        // DELETE: api/FabrukaDb/5
         [HttpDelete("{name}")]
         public async Task<IActionResult> DeleteTicket(string name)
         {

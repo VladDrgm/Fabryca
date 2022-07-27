@@ -9,7 +9,8 @@ import CursorButton from './CursorButton';
     const [description, setDescription] = useState('');
     const [title, setTitle] = useState('');
     const [status, setStatus] = useState('');
-    const [userList] = useState(['Eirik', 'Vlad', 'Pontus'])
+    const [createdBy, setCreatedBy] = useState('');
+    const [assignedTo, setAssignedTo] = useState('');
     const projName = localStorage.getItem('projectName');
 
   
@@ -40,8 +41,8 @@ import CursorButton from './CursorButton';
         Status: status,
         Description: description,
         ProjectName: projName,
-        createdBy: userList[Math.floor((Math.random()*userList.length))],
-        assignedTo: userList[Math.floor((Math.random()*userList.length))]
+        createdBy: createdBy,
+        assignedTo: assignedTo
         }
         
       postToDatabase(newTicket);
@@ -60,6 +61,8 @@ import CursorButton from './CursorButton';
           <Input type='text' placeholder='Title' value={title} className={'ticket__form__field'} onChange={e => setTitle(e.target.value)}/>
           <Input type='text'placeholder='Status' value={status} className={'ticket__form__field'} onChange={e => setStatus(e.target.value)}/>
           <Input type='text'placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/>
+          <Input type='text'placeholder='Created By' value={createdBy} className={'ticket__form__field'} onChange={e => setCreatedBy(e.target.value)}/>
+          <Input type='text'placeholder='Assigned To' value={assignedTo} className={'ticket__form__field'} onChange={e => setAssignedTo(e.target.value)}/>
           <CursorButton type={'Pointer'} text={'Add a new ticket'} />
         </form>
       </Frame>
