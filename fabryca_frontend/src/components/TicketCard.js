@@ -108,8 +108,8 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
           <CursorButton type={'Pointer'} text={'Edit'} />
         </Link>
         <h4 className='ticket__label'>Title:</h4>
-        <h3>{ticket.title}</h3>
-        <p>({ticket.status})</p>
+        <h3 className='ticket__title'>{ticket.title}</h3>
+        <p className='ticket__status'>({ticket.status})</p>
       </header>
       <section className='ticket__body'>
         <h4 className='ticket__label' onClick={toggleDesc}>Description {descSymbol}</h4>
@@ -122,7 +122,7 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
           </div>
           <div className='lilbox'>
             <h4 className='ticket__label'>Assigned To:</h4>
-            <p>{ticket.assignedTo}</p>
+            <p className='ticket__assigned'>{ticket.assignedTo}</p>
           </div>
         </div>
         <hr className='ticket__hr'/>
