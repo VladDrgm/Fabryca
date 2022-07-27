@@ -54,11 +54,11 @@ const CategoryCard = ({category, ticketList, setTicketList}) => {
       <h3>{category.name}({localTicketList.length}) </h3> 
       {arrowSymbol}
     </header>
-      <CursorButton type={'Pointer'} text={'Delete Category'} onClick={deleteCategory} className="delete__category"/>
     <section className={showCategory === true ? 'category__list--show' : 'category__list--hidden'}>
-    {localTicketList.map(ticket =>
-        ( <TicketCard setTicketList={setTicketList} ticketList={ticketList} ticket={ticket} key={ticket.createdAt + ticket.title}/> ))}
+    {localTicketList.length !== 0 ? localTicketList.map(ticket =>
+        ( <TicketCard setTicketList={setTicketList} ticketList={ticketList} ticket={ticket} key={ticket.createdAt + ticket.title}/> )) : <h4>There aren't any tickets for this category</h4>}
     </section>
+        {showCategory === true ? <CursorButton type={'Pointer'} text={'Delete Category'} onClick={deleteCategory} /> : null}
     </Frame>
   </Frame>
   )
