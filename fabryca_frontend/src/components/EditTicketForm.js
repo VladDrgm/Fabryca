@@ -37,6 +37,7 @@ const EditTicketForm = () =>{
     useEffect(() => {
       getTicket();
       console.log("getting ticket")
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     
