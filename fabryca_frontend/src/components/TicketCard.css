@@ -18,6 +18,7 @@
   align-items: center;
 }
 .ticket__buttons {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   width: auto;
@@ -28,8 +29,18 @@
   display: none;
 }
 .ticket__description--show {
+  margin-top: auto;
+  margin-bottom: auto;
   width: 90%;
   display: block;
+}
+.ticket__title {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.ticket__status {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .show__desc__arrow {
@@ -37,10 +48,17 @@
   width: 1em;
 }
 .ticket__date {
-  
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.ticket__assigned{
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .ticket__label {
+  margin-top: auto;
+  margin-bottom: auto;
   align-self: flex-start;
   text-decoration: underline;
 }

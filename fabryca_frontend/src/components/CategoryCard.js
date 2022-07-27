@@ -20,7 +20,7 @@ const CategoryCard = ({category, ticketList, setTicketList}) => {
     ticketSorter(ticketList)
       // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ticketList]);
-  const [showCategory, setShowCategory] = useState(false);
+  const [showCategory, setShowCategory] = useState(true);
 
   const toggleCategory = () => {
     setShowCategory(!showCategory);
