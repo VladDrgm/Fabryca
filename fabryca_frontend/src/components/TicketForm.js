@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { Frame, Input} from '@react95/core'
+import { Frame, Input, TextArea } from '@react95/core'
 import './TicketForm.css';
 import { useNavigate } from 'react-router-dom';
 import CursorButton from './CursorButton';
@@ -60,7 +60,8 @@ import CursorButton from './CursorButton';
           <h3 className='ticket__form__title'>Add a New Ticket to: {projName}</h3>
           <Input type='text' placeholder='Title' value={title} className={'ticket__form__field'} onChange={e => setTitle(e.target.value)}/>
           <Input type='text'placeholder='Status' value={status} className={'ticket__form__field'} onChange={e => setStatus(e.target.value)}/>
-          <Input type='text'placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/>
+          {/* <Input type='text'placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)}/> */}
+          <TextArea rows={5} placeholder='Description' value={description} className={'ticket__form__field'} onChange={e => setDescription(e.target.value)} />
           <Input type='text'placeholder='Created By' value={createdBy} className={'ticket__form__field'} onChange={e => setCreatedBy(e.target.value)}/>
           <Input type='text'placeholder='Assigned To' value={assignedTo} className={'ticket__form__field'} onChange={e => setAssignedTo(e.target.value)}/>
           <CursorButton type={'Pointer'} text={'Add a new ticket'} />
