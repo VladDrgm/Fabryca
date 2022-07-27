@@ -37,7 +37,7 @@ import CursorButton from './CursorButton';
       setDescription('');
       setStatus('');
       setCategory('');
-      navigate('/home');
+      navigate('/projects');
     }
 
     return(
