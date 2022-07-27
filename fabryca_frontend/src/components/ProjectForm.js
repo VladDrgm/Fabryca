@@ -13,6 +13,7 @@ import CursorButton from './CursorButton';
 
       const body = JSON.stringify(newProject);
       
+
       await fetch('https://fabrycaapi.azurewebsites.net/api/Projects',{
         method: 'POST',
         mode: 'cors',
