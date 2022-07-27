@@ -1,3 +1,7 @@
+button {
+  cursor: url('../images/Cursor_15.cur'), auto !important;
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
     position: fixed;
@@ -11,6 +15,8 @@
   .bm-burger-bars {
     background: black;
   }
+
+  
   
   /* Color/shape of burger icon bars on hover*/
   .bm-burger-bars-hover {
@@ -19,6 +25,7 @@
   
   /* Position and sizing of clickable cross button */
   .bm-cross-button {
+    cursor: url('../images/Cursor_15.cur'), auto !important;
     height: 24px;
     width: 24px;
   }
@@ -26,6 +33,7 @@
   
   /* Color/shape of close button cross */
   .bm-cross {
+    cursor: url('../images/Cursor_15.cur'), auto !important;
     background: black;
   }
   
@@ -42,6 +50,7 @@
   
   /* General sidebar styles */
   .bm-menu {
+    
     background: #c3c3c3;
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
@@ -60,6 +69,7 @@
   
   /* Individual item */
   .bm-item {
+    cursor: url('../images/Cursor_15.cur'), auto;
     display: inline-block;
   }
   
