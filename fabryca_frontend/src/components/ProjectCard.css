@@ -7,10 +7,8 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    padding-right: 1em;
   }
 .project__card__title {
-    margin-left: 0.5em;
-}
-.project__card__link {
-    margin-right: 0.5em;
+    margin-left: 0.75em;
 }
