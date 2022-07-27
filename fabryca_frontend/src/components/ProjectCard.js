@@ -1,6 +1,7 @@
 import {  useNavigate } from 'react-router-dom';
 import './ProjectCard.css';
-import { Frame, Button } from '@react95/core';
+import { Frame } from '@react95/core';
+import CursorButton from './CursorButton';
 
 
 const ProjectCard = ({project}) => {
@@ -15,7 +16,7 @@ const ProjectCard = ({project}) => {
         <Frame padding={4} className="project__card--outer">
             <Frame boxShadow="in" className="project__card--inner">
                 <h3 className="project__card__title">{project.name}</h3>
-                <Button className="project__card__link" onClick={handleClick}>Go to Project</Button>
+                <CursorButton text={'Go to Project'} className="project__card__link" onClick={handleClick} />
             </Frame>
         </Frame>
     );

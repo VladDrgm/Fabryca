@@ -13,7 +13,7 @@ const Navbar = () => {
                 <BurgerMenu pageWrapId={'page-wrap'} outerContainerId={'outer-container'}/>
 
                 <div className="logo__navbar">
-                    <h3>Fabryca</h3>
+                    <h3 className='logo__text'>Fabryca</h3>
                 </div>
 
                 <div className="navbar__buttons">

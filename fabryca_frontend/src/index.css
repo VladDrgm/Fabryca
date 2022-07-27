@@ -1,7 +1,9 @@
 * {
   box-sizing: border-box;
-  font-family: monospace;
+  font-family: 'windows';
 }
+
+
 html { 
   background-color: #008080;
 }

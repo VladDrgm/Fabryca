@@ -27,8 +27,10 @@ font-weight: bold;
 }
 
 .logo__navbar {
-    font-family: monospace;
     width: 100%;
+}
+.logo__text {
+    font-family: arial;
 }
 
  .burger__button {
