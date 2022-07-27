@@ -18,6 +18,7 @@ const Board2 = ({projectName}) => {
   useEffect(() => {
     setTimeout(() => {
       getTicketData();
+      getCategoriesData();
     }, 2000);
     // eslint-disable-next-line
   }, [ticketList]);
@@ -29,19 +30,12 @@ const Board2 = ({projectName}) => {
 
   }
 
-
   const getCategoriesData = async () => {
     const response = await fetch(`https://fabrycaapi.azurewebsites.net/api/Categories/${projectName}`);
     const data = await response.json();
     setCategoryList(data);
     return data;
   }
-
-  // useEffect(() => {
-  //   getCategoriesData()
-  //   console.log(categoryList)
-  //   // eslint-disable-next-line
-  // }, []);
   
   return(
     <div className='board'>

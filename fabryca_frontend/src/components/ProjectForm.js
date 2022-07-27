@@ -12,8 +12,8 @@ import CursorButton from './CursorButton';
     const postToDatabase = async (newProject) => {
 
       const body = JSON.stringify(newProject);
-
-      await fetch('https://fabrycaapi.azurewebsites.net/api/Projects',{
+      
+      await fetch('hhttps://fabrycaapi.azurewebsites.net/api/Projects',{
         method: 'POST',
         mode: 'cors',
         accept: 'text/plain',
@@ -35,8 +35,6 @@ import CursorButton from './CursorButton';
         }
         
       postToDatabase(newProject);
-
-      // navigate('/projects');
   
       setName('');
     }
