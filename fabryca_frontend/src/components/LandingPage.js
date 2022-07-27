@@ -18,7 +18,6 @@ const LandingPage = () => {
                     <Frame boxShadow="in" className='inner__frame'>
                         <img src={Logo} className="landing__logo" alt="Fabryca logo, gray and black square with Fabryca written centered in the middle"/>
                         <header > <h2>Welcome to the easy way of ticketing.</h2> </header>
-                        <br/>
                         <hr className="landing__page__hr"/>
                         <div className="landing__page__body__inner">
                         <h3>Would you like to..</h3>
@@ -31,7 +30,6 @@ const LandingPage = () => {
                         </Link>
                         </div>
                         <hr className="landing__page__hr"/>
-                        <br/>
                         <h3>For questions go to FAQ or contact us at contact@backendboyz.com</h3>
                     </Frame>
                 </Frame>
