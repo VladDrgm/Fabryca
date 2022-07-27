@@ -27,6 +27,7 @@
 }
 
 .category__header {
+  cursor: url('../images/Cursor_15.cur'), auto;
   border: black solid 0.4px;
   display: flex;
   flex-direction: row;
