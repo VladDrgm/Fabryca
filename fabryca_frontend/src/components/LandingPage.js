@@ -5,6 +5,7 @@ import { Frame, ThemeProvider } from '@react95/core';
 import { Link } from 'react-router-dom';
 import CursorButton from './CursorButton';
 import Logo from '../images/FabrycaV2.jpg';
+import LoadingComponent from './LoadingComponent'
 
 const LandingPage = () => {
 
@@ -14,6 +15,7 @@ const LandingPage = () => {
         <div className="App" id="outer-container">
             <div id="page-wrap">
                 <Navbar></Navbar>
+                <LoadingComponent></LoadingComponent>
                 <Frame padding={4} className='outer__frame'>
                     <Frame boxShadow="in" className='inner__frame'>
                         <img src={Logo} className="landing__logo" alt="Fabryca logo, gray and black square with Fabryca written centered in the middle"/>
