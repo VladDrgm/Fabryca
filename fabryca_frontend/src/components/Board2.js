@@ -40,7 +40,7 @@ const Board2 = ({projectName}) => {
   return(
     <div className='board'>
       {categoryList.map(category =>
-        ( <CategoryCard ticketList={ticketList} setTicketList={setTicketList} category={category} key={category.name}/> ))}
+        ( <CategoryCard ticketList={ticketList} categoryList={categoryList} setTicketList={setTicketList} category={category} key={category.name}/> ))}
     </div>
   )
 }
