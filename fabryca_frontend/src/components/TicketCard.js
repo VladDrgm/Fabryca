@@ -6,8 +6,10 @@ import '@react95/icons/icons.css';
 import { Progman46, Progman43 } from '@react95/icons'
 import CursorButton from './CursorButton';
 
-const TicketCard = ({ticket, ticketList, setTicketList}) => {
+const TicketCard = ({ticket, ticketList, setTicketList, category, categoryList}) => {
   const projName = localStorage.getItem('projectName');
+  const categoryIndex = categoryList.indexOf(category);
+  const categoryListLength = categoryList.length;
 
   const deleteToDatabase = async () => {
     const url = 'https://fabrycaapi.azurewebsites.net/api/Tickets/' + ticket.title
@@ -24,43 +26,30 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
       setTicketList(newList)
     }
   };
-
-  const makeOngoing = () => {
-    const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=Ongoing`;
-    
-    fetch(url,{
-      method: 'PUT',
-      mode: 'cors',
-      headers:{'Content-type':'application/json'}
-          }
-    )
-    updateState('Ongoing');
-
-  };
-
-  const makePlanned = () => {
-     const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=Planned`;
-
+  
+  const makeNextCategory = () => {
+    const nextCategory = categoryList[categoryIndex + 1].name
+    const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=${nextCategory}`;
     fetch(url,{
       method: 'PUT',
       mode: 'cors',
       headers:{'Content-type':'application/json'}
       }
     )
-    updateState('Planned');
-  };
+    updateState(nextCategory)
+  }
 
-  const makeCompleted = () => {
-    const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=Completed`;
-
+  const makePrevCategory = () => {
+    const prevCategory = categoryList[categoryIndex - 1].name
+    const url = `https://fabrycaapi.azurewebsites.net/api/Tickets/${projName}/${ticket.title}/category?categoryName=${prevCategory}`;
     fetch(url,{
       method: 'PUT',
       mode: 'cors',
       headers:{'Content-type':'application/json'}
       }
     )
-    updateState('Completed');
-  };
+    updateState(prevCategory)
+  }
 
   const updateState = (newCategory) => {
     console.log(ticketList)
@@ -70,25 +59,22 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
     setTicketList(updatedList);
   }
 
+  const handleNextCategory = (e) => {
+    e.preventDefault();
+    makeNextCategory();
+  }
+
+  const handlePrevCategory = (e) => {
+    e.preventDefault();
+    makePrevCategory();
+  }
+
+
   const handleDelete = (e) => {
     e.preventDefault();
     deleteToDatabase();
   }
 
-  const handleMakeOngoing = (e) => {
-    e.preventDefault();
-    makeOngoing();
-  }
-
-  const handleMakePlanned = (e) => {
-    e.preventDefault();
-    makePlanned();
-  }
-
-  const handleMakeCompleted = (e) => {
-    e.preventDefault();
-    makeCompleted();
-  }
   const navigate = useNavigate();
   const saveNameAndNavigate = (e) => {
     e.preventDefault();
@@ -102,7 +88,6 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
   const descSymbol = showDesc === true ? <Progman46 variant="32x32_1" className='show__desc__arrow'/> : <Progman43 variant="32x32_1" className='show__desc__arrow'/>;
   return(
     <article className='ticket__card'>
-
       <header className='ticket__header'>
         <Link to={{pathname: `/edit`, state: [{ticketName: ticket.name}]}} className='ticket__card--edit' onClick={saveNameAndNavigate}>
           <CursorButton type={'Pointer'} text={'Edit'} />
@@ -128,14 +113,10 @@ const TicketCard = ({ticket, ticketList, setTicketList}) => {
         <hr className='ticket__hr'/>
         <div className='ticket__buttons'>
           <CursorButton type={'Pointer'} text={'Delete'} onClick={handleDelete}/>
-          {ticket.categoryName === 'Planned' ? <CursorButton type={'Pointer'} text={'Ongoing'} onClick={handleMakeOngoing} /> : null}
-          {ticket.categoryName === 'Ongoing' ? 
-            <div>
-              <CursorButton type={'Pointer'} text={'Planned'} onClick={handleMakePlanned} />
-              <CursorButton type={'Pointer'} text={'Completed'} onClick={handleMakeCompleted} /> 
-            </div>
-          : null} 
-          {ticket.categoryName === 'Completed' ? <CursorButton type={'Pointer'} text={'Ongoing'} onClick={handleMakeOngoing} /> : null}
+          <div>
+          {categoryIndex > 0 ? <CursorButton type={'Pointer'} text={categoryList[categoryIndex + -1].name} onClick={handlePrevCategory} /> : null}
+          {categoryIndex < categoryListLength - 1 ? <CursorButton type={'Pointer'} text={categoryList[categoryIndex + 1].name} onClick={handleNextCategory} /> : null}
+          </div>
         </div>
       </section>
 

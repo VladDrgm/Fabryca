@@ -1,0 +1,29 @@
+.category {
+  border-radius: 0.15em;
+  display: flex;
+  margin: 1em;
+  width: 70% !important;
+}
+.category__list--show {
+  padding: 0.5em;
+}
+.category__list--hidden {
+  display: none;
+}
+
+.category__inner {
+  height: 100%;
+  width: 100% !important;
+}
+
+.category__header {
+  cursor: url('../images/Cursor_15.cur'), auto;
+  border: black solid 0.4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1em;
+  height: 2em;
+  font-size: x-large;
+}
