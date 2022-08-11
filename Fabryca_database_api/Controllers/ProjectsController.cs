@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Fabryca_database_api.Models;
+using System.Text.RegularExpressions;
 
 namespace Fabryca_database_api.Controllers
 {
@@ -31,7 +32,10 @@ namespace Fabryca_database_api.Controllers
           }
           return result;
         }
-        // private bool TicketExists(int id) => (_context.Ticket?.Any(e => e.Id == id)).GetValueOrDefault();
+        //[A-Za-z\d,.?;:\'"!$%() ]*
+        //private bool IsEnLetter(char c) => Regex.IsMatch(c.ToString(), @"^[a-zA-Z]");
+        private bool IsEnTitle(string title) => Regex.IsMatch(title, @"^[a-zA-Z]");
+
 
         // GET: api/FabrukaDb
         [HttpGet]
@@ -49,6 +53,8 @@ namespace Fabryca_database_api.Controllers
         public async Task<ActionResult<Project>> PostProject(ProjectCreation project)
         {
           if (String.IsNullOrEmpty(project.Name)) return BadRequest("Please choose a unique title for the project.");
+          //if (!(project.Name.ToList().TrueForAll(IsEnLetter))) return BadRequest("Please use only English letters as characters.");
+          if (!(IsEnTitle(project.Name))) return BadRequest("Please use only English letters as characters.");
 
           var tick = await _context.Projects.FirstOrDefaultAsync(x => x.Name == project.Name);
 
